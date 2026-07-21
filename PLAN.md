@@ -83,12 +83,12 @@ Commit: `feat: build muare public website`
 
 ## 6. Этап 4 — PostgreSQL и Prisma
 
-- [ ] Подключить development PostgreSQL.
-- [ ] Реализовать Prisma schema согласно Data Model.
-- [ ] Добавить OrganizationSettings с настройками 120 минут и 60 дней.
-- [ ] Реализовать типы услуг и ценовые модификаторы.
-- [ ] Добавить exclusion constraint PostgreSQL для активных броней.
-- [ ] Создать идемпотентный seed студии, мастеров, услуг и графиков.
+- [x] Подключить development PostgreSQL.
+- [x] Реализовать Prisma schema согласно Data Model.
+- [x] Добавить OrganizationSettings с настройками 120 минут и 60 дней.
+- [x] Реализовать типы услуг и ценовые модификаторы.
+- [x] Добавить exclusion constraint PostgreSQL для активных броней.
+- [x] Создать идемпотентный seed студии, мастеров, услуг и графиков.
 
 Проверка: `prisma validate`, `prisma generate`, миграция на чистой test DB и повторный seed.
 
