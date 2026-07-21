@@ -73,7 +73,7 @@ export default function HomePage() {
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 55vw"
-                src="/images/studio/reception.png"
+                src="/images/studio/reception-home.jpeg"
               />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-foreground/55 to-transparent p-6 pt-24 text-xs uppercase tracking-[0.18em] text-white">
                 Тёплое пространство для вашего времени
