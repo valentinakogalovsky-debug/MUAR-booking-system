@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { SiteFooter } from "@/components/site-footer";
 import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Section } from "@/components/ui/section";
@@ -38,90 +39,91 @@ const directions = [
 
 export default function HomePage() {
   return (
-    <main>
-      <section className="overflow-hidden">
-        <Container className="grid min-h-[calc(100svh-5rem)] items-stretch gap-10 py-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16 lg:py-12">
-          <div className="flex flex-col justify-center py-10">
-            <p className="mb-6 text-[11px] font-medium uppercase tracking-[0.32em] text-muted">
-              Студия ногтевого сервиса · MUARÉ
-            </p>
-            <h1 className="font-serif text-[clamp(3.3rem,7vw,6.8rem)] font-light leading-[0.92] tracking-[0.01em]">
-              Искусство
-              <br />
-              <span className="italic text-accent">ухоженных рук</span>
-            </h1>
-            <p className="mt-8 max-w-xl text-base leading-8 text-foreground/70 sm:text-lg">
-              Премиальные материалы, мастера с опытом от 9 лет и сервис, ради которого возвращаются.
-              Запись онлайн за пару касаний.
-            </p>
-            <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-              <ButtonLink href="/booking">Записаться</ButtonLink>
-              <ButtonLink href="/services" variant="ghost">
-                Услуги и цены
-              </ButtonLink>
-            </div>
-            <p className="mt-10 text-xs uppercase tracking-[0.18em] text-muted">
-              Ежедневно, 09:00–20:00 · Брянск, ул. Куйбышева, 7
-            </p>
-          </div>
-          <div className="relative min-h-[520px] overflow-hidden rounded-[2px] lg:min-h-full">
-            <Image
-              alt="Зона ресепшен студии MUARÉ"
-              className="object-cover"
-              fill
-              priority
-              sizes="(max-width: 1024px) 100vw, 55vw"
-              src="/images/studio/reception.png"
-            />
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-foreground/55 to-transparent p-6 pt-24 text-xs uppercase tracking-[0.18em] text-white">
-              Тёплое пространство для вашего времени
-            </div>
-          </div>
-        </Container>
-      </section>
-      <Section eyebrow="Направления" title="Уход, который выбирают для себя">
-        <div className="divide-y divide-line border-y border-line">
-          {directions.map((direction, index) => (
-            <article
-              className={`grid gap-8 px-6 py-12 sm:px-10 sm:py-16 lg:grid-cols-12 lg:gap-14 ${direction.color}`}
-              key={direction.title}
-            >
-              <div className="lg:col-span-4">
-                <p className="text-sm italic text-accent">0{index + 1}</p>
-                <h3 className="mt-6 max-w-md font-serif text-4xl font-normal leading-tight sm:text-5xl">
-                  {direction.title}
-                </h3>
-                <p className="mt-4 text-sm uppercase tracking-[0.14em] text-muted">
-                  {direction.subtitle}
-                </p>
+    <>
+      <main>
+        <section className="overflow-hidden">
+          <Container className="grid min-h-[calc(100svh-5rem)] items-stretch gap-10 py-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16 lg:py-12">
+            <div className="flex flex-col justify-center py-10">
+              <p className="mb-6 text-[11px] font-medium uppercase tracking-[0.32em] text-muted">
+                Студия ногтевого сервиса · MUARÉ
+              </p>
+              <h1 className="font-serif text-[clamp(3.3rem,7vw,6.8rem)] font-light leading-[0.92] tracking-[0.01em]">
+                Искусство
+                <br />
+                <span className="italic text-accent">ухоженных рук</span>
+              </h1>
+              <p className="mt-8 max-w-xl text-base leading-8 text-foreground/70 sm:text-lg">
+                Премиальные материалы, мастера с опытом от 9 лет и сервис, ради которого
+                возвращаются. Запись онлайн за пару касаний.
+              </p>
+              <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+                <ButtonLink href="/booking">Записаться</ButtonLink>
+                <ButtonLink href="/services" variant="ghost">
+                  Услуги и цены
+                </ButtonLink>
               </div>
-              <div className="space-y-5 leading-8 text-foreground/70 lg:col-span-7 lg:col-start-6">
-                {direction.paragraphs.map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
-                ))}
+              <p className="mt-10 text-xs uppercase tracking-[0.18em] text-muted">
+                Ежедневно, 09:00–20:00 · Брянск, ул. Куйбышева, 7
+              </p>
+            </div>
+            <div className="relative min-h-[520px] overflow-hidden rounded-[2px] lg:min-h-full">
+              <Image
+                alt="Зона ресепшен студии MUARÉ"
+                className="object-cover"
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 55vw"
+                src="/images/studio/reception.png"
+              />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-foreground/55 to-transparent p-6 pt-24 text-xs uppercase tracking-[0.18em] text-white">
+                Тёплое пространство для вашего времени
               </div>
-            </article>
-          ))}
-        </div>
-        <ButtonLink className="mt-8" href="/services" variant="ghost">
-          Смотреть все услуги
-        </ButtonLink>
-      </Section>
-      <section className="bg-accent py-16 text-white sm:py-24">
-        <Container className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
-          <div>
-            <p className="text-[11px] font-medium uppercase tracking-[0.32em] text-lemon">
-              Онлайн-запись
-            </p>
-            <h2 className="mt-4 max-w-2xl font-serif text-4xl font-light leading-[1.05] sm:text-6xl">
-              Выберите удобное время для себя
-            </h2>
+            </div>
+          </Container>
+        </section>
+        <Section eyebrow="Направления" title="Уход, который выбирают для себя">
+          <div className="divide-y divide-line border-y border-line">
+            {directions.map((direction, index) => (
+              <article
+                className={`grid gap-8 px-6 py-12 sm:px-10 sm:py-16 lg:grid-cols-12 lg:gap-14 ${direction.color}`}
+                key={direction.title}
+              >
+                <div className="lg:col-span-4">
+                  <p className="text-sm italic text-accent">0{index + 1}</p>
+                  <h3 className="mt-6 max-w-md font-serif text-4xl font-normal leading-tight sm:text-5xl">
+                    {direction.title}
+                  </h3>
+                  <p className="mt-4 text-sm uppercase tracking-[0.14em] text-muted">
+                    {direction.subtitle}
+                  </p>
+                </div>
+                <div className="space-y-5 leading-8 text-foreground/70 lg:col-span-7 lg:col-start-6">
+                  {direction.paragraphs.map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
+                </div>
+              </article>
+            ))}
           </div>
-          <ButtonLink href="/booking" variant="light">
-            Записаться
+          <ButtonLink className="mt-8" href="/services" variant="ghost">
+            Смотреть все услуги
           </ButtonLink>
-        </Container>
-      </section>
-    </main>
+        </Section>
+        <section className="border-y border-line bg-background py-16 sm:py-24">
+          <Container className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
+            <div>
+              <p className="text-[11px] font-medium uppercase tracking-[0.32em] text-accent">
+                Онлайн-запись
+              </p>
+              <h2 className="mt-4 max-w-2xl font-serif text-4xl font-light leading-[1.05] sm:text-6xl">
+                Выберите удобное время для себя
+              </h2>
+            </div>
+            <ButtonLink href="/booking">Записаться</ButtonLink>
+          </Container>
+        </section>
+      </main>
+      <SiteFooter />
+    </>
   );
 }
