@@ -1,13 +1,39 @@
 import Image from "next/image";
 import { ButtonLink } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { Container } from "@/components/ui/container";
 import { Section } from "@/components/ui/section";
 
-const services = [
-  { name: "Маникюр", note: "Уход, покрытие и укрепление", color: "bg-lavender/45" },
-  { name: "Педикюр", note: "Классические и SPA-процедуры", color: "bg-pistachio/45" },
-  { name: "Две услуги", note: "Один непрерывный визит", color: "bg-lemon/50" },
+const directions = [
+  {
+    title: "Маникюр",
+    subtitle: "Уход, покрытие и укрепление",
+    paragraphs: [
+      "Красивый маникюр начинается задолго до нанесения покрытия. Мы уделяем внимание каждой детали: аккуратно обрабатываем кутикулу, подбираем форму, которая подчеркнёт естественную красоту рук, и работаем только с профессиональными материалами, сохраняющими здоровье ногтевой пластины.",
+      "Во время процедуры можно расслабиться, насладиться чашкой ароматного кофе или чая, полистать журнал или просто позволить себе редкую роскошь — никуда не спешить. Пространство студии наполнено мягким естественным светом, спокойной музыкой и ощущением уюта, которое помогает отвлечься от повседневной суеты.",
+      "Маникюр в MUARÉ — это не просто уход за руками. Это несколько часов спокойствия, внимания к себе и удовольствия от безупречного результата.",
+    ],
+    color: "bg-lavender/30",
+  },
+  {
+    title: "Педикюр",
+    subtitle: "Классический уход и SPA-процедуры",
+    paragraphs: [
+      "Педикюр — это возможность сделать паузу и посвятить время себе. Удобные кресла, спокойная атмосфера и размеренный ритм процедуры позволяют полностью расслабиться, пока мастер бережно ухаживает за кожей стоп и ногтями.",
+      "Мы сочетаем профессиональный уход с ощущением настоящего комфорта. Тёплые полотенца, деликатная обработка, качественные материалы и внимание к каждой детали превращают обычный визит в приятный ритуал восстановления.",
+      "После процедуры остаётся не только ощущение лёгкости и ухоженности, но и желание вернуться за этим состоянием снова.",
+    ],
+    color: "bg-pistachio/30",
+  },
+  {
+    title: "Маникюр и педикюр одновременно",
+    subtitle: "Один непрерывный визит",
+    paragraphs: [
+      "Мы знаем, насколько ценно свободное время. Поэтому вы можете совместить маникюр и педикюр в одном визите, доверив заботу сразу двум мастерам.",
+      "Пока один мастер работает над маникюром, другой выполняет педикюр, позволяя значительно сократить время процедуры без потери качества и внимания к деталям.",
+      "Это особенно удобно перед отпуском, важным мероприятием или в насыщенные рабочие недели, когда хочется получить полный уход за один приезд. Вы уходите с ощущением завершённости — всё уже сделано, а впереди остаётся только наслаждаться результатом.",
+    ],
+    color: "bg-lemon/35",
+  },
 ] as const;
 
 export default function HomePage() {
@@ -54,51 +80,32 @@ export default function HomePage() {
         </Container>
       </section>
       <Section eyebrow="Направления" title="Уход, который выбирают для себя">
-        <div className="grid gap-4 md:grid-cols-3">
-          {services.map((service, index) => (
-            <Card className={`min-h-56 ${service.color}`} key={service.name}>
-              <p className="text-sm italic text-accent">0{index + 1}</p>
-              <h3 className="mt-10 font-serif text-3xl font-normal">{service.name}</h3>
-              <p className="mt-3 text-sm text-foreground/65">{service.note}</p>
-            </Card>
+        <div className="divide-y divide-line border-y border-line">
+          {directions.map((direction, index) => (
+            <article
+              className={`grid gap-8 px-6 py-12 sm:px-10 sm:py-16 lg:grid-cols-12 lg:gap-14 ${direction.color}`}
+              key={direction.title}
+            >
+              <div className="lg:col-span-4">
+                <p className="text-sm italic text-accent">0{index + 1}</p>
+                <h3 className="mt-6 max-w-md font-serif text-4xl font-normal leading-tight sm:text-5xl">
+                  {direction.title}
+                </h3>
+                <p className="mt-4 text-sm uppercase tracking-[0.14em] text-muted">
+                  {direction.subtitle}
+                </p>
+              </div>
+              <div className="space-y-5 leading-8 text-foreground/70 lg:col-span-7 lg:col-start-6">
+                {direction.paragraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
+            </article>
           ))}
         </div>
         <ButtonLink className="mt-8" href="/services" variant="ghost">
           Смотреть все услуги
         </ButtonLink>
-      </Section>
-      <Section className="bg-surface" eyebrow="Атмосфера" title="Место, где можно замедлиться">
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-[1.25fr_0.75fr]">
-          <figure className="relative min-h-[520px] overflow-hidden rounded-[2px]">
-            <Image
-              alt="Зона ожидания студии MUARÉ"
-              className="object-cover"
-              fill
-              sizes="(max-width: 1024px) 100vw, 60vw"
-              src="/images/studio/waiting-area.png"
-            />
-          </figure>
-          <div className="grid gap-4">
-            <figure className="relative min-h-64 overflow-hidden rounded-[2px]">
-              <Image
-                alt="Рабочее место мастера MUARÉ"
-                className="object-cover"
-                fill
-                sizes="(max-width: 1024px) 100vw, 35vw"
-                src="/images/studio/workspace.png"
-              />
-            </figure>
-            <figure className="relative min-h-64 overflow-hidden rounded-[2px]">
-              <Image
-                alt="Детали сервиса MUARÉ"
-                className="object-cover"
-                fill
-                sizes="(max-width: 1024px) 100vw, 35vw"
-                src="/images/studio/drinks-corner.png"
-              />
-            </figure>
-          </div>
-        </div>
       </Section>
       <section className="bg-accent py-16 text-white sm:py-24">
         <Container className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
