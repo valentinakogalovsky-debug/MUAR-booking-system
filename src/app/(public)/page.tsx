@@ -14,6 +14,9 @@ const directions = [
       "Маникюр в MUARÉ — это не просто уход за руками. Это несколько часов спокойствия, внимания к себе и удовольствия от безупречного результата.",
     ],
     color: "bg-lavender/30",
+    image: "/images/services/manicure.png",
+    imageAlt: "Процедура маникюра в светлом кабинете студии MUARÉ",
+    imagePosition: "center",
   },
   {
     title: "Педикюр",
@@ -24,6 +27,9 @@ const directions = [
       "После процедуры остаётся не только ощущение лёгкости и ухоженности, но и желание вернуться за этим состоянием снова.",
     ],
     color: "bg-pistachio/30",
+    image: "/images/services/pedicure.png",
+    imageAlt: "Педикюрное кресло в студии MUARÉ",
+    imagePosition: "center",
   },
   {
     title: "Две услуги",
@@ -34,6 +40,9 @@ const directions = [
       "Такой формат особенно удобен перед отпуском, важным событием или просто тогда, когда хочется закрыть все бьюти-задачи за одно посещение, не жертвуя качеством сервиса и комфортом.",
     ],
     color: "bg-lemon/35",
+    image: "/images/services/combined-visit.png",
+    imageAlt: "Маникюр и педикюр за один визит в студии MUARÉ",
+    imagePosition: "center",
   },
 ] as const;
 
@@ -88,7 +97,7 @@ export default function HomePage() {
                 className={`grid gap-8 px-6 py-12 sm:px-10 sm:py-16 lg:grid-cols-12 lg:gap-14 ${direction.color}`}
                 key={direction.title}
               >
-                <div className="lg:col-span-4">
+                <div className="lg:col-span-3">
                   <p className="text-sm italic text-accent">0{index + 1}</p>
                   <h3 className="mt-6 max-w-md font-serif text-4xl font-normal leading-tight sm:text-5xl">
                     {direction.title}
@@ -97,7 +106,17 @@ export default function HomePage() {
                     {direction.subtitle}
                   </p>
                 </div>
-                <div className="space-y-5 leading-8 text-foreground/80 lg:col-span-7 lg:col-start-6">
+                <div className="relative aspect-[4/3] min-h-72 overflow-hidden lg:col-span-4 lg:aspect-[4/5] lg:min-h-0">
+                  <Image
+                    alt={direction.imageAlt}
+                    className="object-cover"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 34vw"
+                    src={direction.image}
+                    style={{ objectPosition: direction.imagePosition }}
+                  />
+                </div>
+                <div className="space-y-5 leading-8 text-foreground/80 lg:col-span-4 lg:col-start-9">
                   {direction.paragraphs.map((paragraph) => (
                     <p key={paragraph}>{paragraph}</p>
                   ))}
