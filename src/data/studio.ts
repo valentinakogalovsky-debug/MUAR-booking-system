@@ -7,6 +7,12 @@ export const services = [
   },
   {
     category: "Маникюр",
+    name: "Мужской маникюр",
+    price: "2 500 ₽",
+    duration: "60 минут",
+  },
+  {
+    category: "Маникюр",
     name: "Комбинированный маникюр без покрытия",
     price: "5 000 ₽",
     duration: "180 минут",
