@@ -52,7 +52,7 @@ export default function HomePage() {
                 <br />
                 <span className="italic text-accent">ухоженных рук</span>
               </h1>
-              <p className="mt-8 max-w-xl text-base leading-8 text-foreground/70 sm:text-lg">
+              <p className="mt-8 max-w-xl text-base leading-8 text-foreground/80 sm:text-lg">
                 Премиальные материалы, мастера с опытом от 9 лет и сервис, ради которого
                 возвращаются. Запись онлайн за пару касаний.
               </p>
@@ -97,7 +97,7 @@ export default function HomePage() {
                     {direction.subtitle}
                   </p>
                 </div>
-                <div className="space-y-5 leading-8 text-foreground/70 lg:col-span-7 lg:col-start-6">
+                <div className="space-y-5 leading-8 text-foreground/80 lg:col-span-7 lg:col-start-6">
                   {direction.paragraphs.map((paragraph) => (
                     <p key={paragraph}>{paragraph}</p>
                   ))}

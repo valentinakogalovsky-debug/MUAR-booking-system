@@ -43,7 +43,7 @@ export default function ServicesPage() {
         ))}
         <section className="mt-20 border-t border-line pt-16">
           <h2 className="font-serif text-4xl font-light sm:text-5xl">Покрытие и дизайн</h2>
-          <p className="mt-4 max-w-2xl text-foreground/65">
+          <p className="mt-4 max-w-2xl text-foreground/75">
             Дополнения влияют на стоимость, но не увеличивают длительность основной записи.
           </p>
           <div className="mt-8 divide-y divide-line border-y border-line">

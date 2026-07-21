@@ -22,7 +22,7 @@ export default function FaqPage() {
                 <span>{question}</span>
                 <span className="text-accent transition group-open:rotate-45">+</span>
               </summary>
-              <p className="mt-4 max-w-2xl leading-7 text-foreground/65">{answer}</p>
+              <p className="mt-4 max-w-2xl leading-7 text-foreground/75">{answer}</p>
             </details>
           ))}
         </div>

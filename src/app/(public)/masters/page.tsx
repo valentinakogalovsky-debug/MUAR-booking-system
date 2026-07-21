@@ -37,7 +37,7 @@ export default function MastersPage() {
             <h2 className="mt-10 font-serif text-3xl font-normal group-hover:text-accent">
               {master.name}
             </h2>
-            <p className="mt-4 text-sm text-foreground/65">{master.schedule}</p>
+            <p className="mt-4 text-sm text-foreground/75">{master.schedule}</p>
             <span className="mt-8 inline-block text-xs font-medium uppercase tracking-[0.16em]">
               Подробнее →
             </span>

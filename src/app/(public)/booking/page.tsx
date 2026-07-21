@@ -25,7 +25,7 @@ export default function BookingPage() {
         </ol>
         <Card className="mt-8 text-center">
           <h2 className="font-serif text-4xl font-light">Модуль готовится к подключению</h2>
-          <p className="mx-auto mt-4 max-w-xl text-foreground/65">
+          <p className="mx-auto mt-4 max-w-xl text-foreground/75">
             На следующих этапах здесь появятся услуги, мастера и свободные интервалы с шагом 15
             минут.
           </p>

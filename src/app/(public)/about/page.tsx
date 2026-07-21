@@ -44,7 +44,7 @@ export default function AboutPage() {
             <h1 className="mt-6 max-w-3xl font-serif text-5xl font-light leading-[0.98] sm:text-7xl">
               Пространство, в котором хочется задержаться
             </h1>
-            <p className="mt-8 max-w-2xl text-lg leading-8 text-foreground/70">
+            <p className="mt-8 max-w-2xl text-lg leading-8 text-foreground/80">
               MUARÉ — это не просто студия ногтевого сервиса. Это место, где время словно
               замедляется, а забота ощущается в каждой детали — от мягкого света до первого глотка
               ароматного чая.
@@ -69,7 +69,7 @@ export default function AboutPage() {
             Каждая деталь пространства создана с одной целью — чтобы вы почувствовали себя спокойно
             с первых минут.
           </p>
-          <div className="space-y-6 leading-8 text-foreground/70 lg:col-span-6 lg:col-start-7">
+          <div className="space-y-6 leading-8 text-foreground/80 lg:col-span-6 lg:col-start-7">
             <p>
               Тёплые природные оттенки, натуральные материалы, мягкий дневной свет и продуманная
               атмосфера помогают оставить суету за дверью и посвятить время только себе. Здесь нет
@@ -102,7 +102,7 @@ export default function AboutPage() {
                   src={photo.src}
                 />
               </div>
-              <figcaption className="mt-4 max-w-md text-sm leading-6 text-foreground/65">
+              <figcaption className="mt-4 max-w-md text-sm leading-6 text-foreground/75">
                 {photo.caption}
               </figcaption>
             </figure>

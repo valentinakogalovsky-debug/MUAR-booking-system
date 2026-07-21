@@ -17,7 +17,7 @@ export function SiteFooter() {
           <p className="text-[11px] font-medium uppercase tracking-[0.22em] text-accent">
             Контакты
           </p>
-          <address className="mt-4 space-y-2 text-sm not-italic text-foreground/70">
+          <address className="mt-4 space-y-2 text-sm not-italic text-foreground/80">
             <p>Ежедневно, 09:00–20:00</p>
             <p>ул. Куйбышева, 7</p>
             <a className="block transition hover:text-accent" href="tel:+79038184486">
@@ -29,7 +29,7 @@ export function SiteFooter() {
           <p className="text-[11px] font-medium uppercase tracking-[0.22em] text-accent">
             Клиентам
           </p>
-          <div className="mt-4 flex flex-col gap-2 text-sm text-foreground/70">
+          <div className="mt-4 flex flex-col gap-2 text-sm text-foreground/80">
             <Link className="transition hover:text-accent" href="/booking">
               Записаться онлайн
             </Link>

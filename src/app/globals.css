@@ -4,7 +4,7 @@
   --background: #f7f1ec;
   --foreground: #3a343c;
   --surface: #fbf7f2;
-  --muted: #8f8299;
+  --muted: #756c7c;
   --accent: #8e7cb0;
   --sand: #e7d3ca;
   --pistachio: #b4c49c;
@@ -40,7 +40,7 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: "Jost", ui-sans-serif, system-ui, sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.65;
 }
 

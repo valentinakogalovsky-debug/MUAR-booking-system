@@ -33,7 +33,7 @@ export function PagePlaceholder({
         <h1 className="max-w-4xl font-serif text-5xl font-light leading-[0.98] tracking-[0.01em] sm:text-7xl lg:text-8xl">
           {title}
         </h1>
-        <p className="mt-7 max-w-2xl text-base leading-8 text-foreground/70 sm:text-lg">
+        <p className="mt-7 max-w-2xl text-base leading-8 text-foreground/80 sm:text-lg">
           {description}
         </p>
         <ButtonLink className="mt-10 w-fit" href={actionHref}>
