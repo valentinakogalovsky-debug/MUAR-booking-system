@@ -6,7 +6,6 @@ const navigation = [
   { label: "О студии", href: "/about" },
   { label: "Услуги и цены", href: "/services" },
   { label: "Мастера", href: "/masters" },
-  { label: "Интерьер", href: "/interior" },
   { label: "Контакты", href: "/contacts" },
 ] as const;
 
