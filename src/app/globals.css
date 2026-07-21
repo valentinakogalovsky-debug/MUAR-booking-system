@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f7f1ec;
+  --foreground: #3a343c;
+  --surface: #fbf7f2;
+  --muted: #8f8299;
+  --accent: #8e7cb0;
+  --sand: #e7d3ca;
+  --pistachio: #b4c49c;
+  --lavender: #c1b4d8;
+  --lemon: #ece3a0;
+  --line: rgb(58 52 60 / 13%);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-sand: var(--sand);
+  --color-pistachio: var(--pistachio);
+  --color-lavender: var(--lavender);
+  --color-lemon: var(--lemon);
+  --color-line: var(--line);
+  --font-sans: "Jost", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "Jost", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 300;
+  line-height: 1.65;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+::selection {
+  background: var(--lavender);
+  color: var(--foreground);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
