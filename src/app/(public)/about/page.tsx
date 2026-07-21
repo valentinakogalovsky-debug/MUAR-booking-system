@@ -11,55 +11,55 @@ export const metadata: Metadata = {
 
 const editorialPhotos = [
   {
-    src: "/images/studio/reception.png",
-    alt: "Светлая зона встречи студии MUARÉ",
-    caption: "Мягкий дневной свет сопровождает нас весь день.",
-    className: "lg:col-span-7",
-    aspect: "aspect-[4/5] sm:aspect-[5/4] lg:aspect-[4/5]",
-  },
-  {
     src: "/images/studio/workspace.png",
     alt: "Чистое рабочее место мастера MUARÉ",
     caption: "Пространство, где каждая деталь продумана для вашего комфорта.",
-    className: "lg:col-span-5 lg:mt-28",
-    aspect: "aspect-[4/5]",
   },
   {
     src: "/images/studio/waiting-area.png",
     alt: "Уютная зона ожидания студии MUARÉ",
     caption: "Тихий уголок, в котором можно оставить суету за дверью.",
-    className: "lg:col-span-5 lg:mt-20",
-    aspect: "aspect-[4/5]",
   },
   {
     src: "/images/studio/drinks-corner.png",
     alt: "Уголок с чаем и кофе в студии MUARÉ",
     caption: "Небольшая пауза с чашкой чая перед процедурой.",
-    className: "lg:col-span-7",
-    aspect: "aspect-[4/5] sm:aspect-[5/4] lg:aspect-[4/5]",
   },
   {
     src: "/images/studio/texture-detail.png",
     alt: "Керамика, текстиль и природные детали интерьера MUARÉ",
     caption: "Натуральные материалы, к которым приятно прикасаться.",
-    className: "lg:col-span-8 lg:col-start-3 lg:mt-20",
-    aspect: "aspect-[4/5] sm:aspect-[3/2]",
   },
 ] as const;
 
 export default function AboutPage() {
   return (
     <main>
-      <section className="border-b border-line py-16 sm:py-24 lg:py-32">
-        <Container>
-          <p className="text-[11px] font-medium uppercase tracking-[0.32em] text-muted">О студии</p>
-          <h1 className="mt-6 max-w-5xl font-serif text-5xl font-light leading-[0.98] sm:text-7xl lg:text-8xl">
-            Пространство, в котором хочется задержаться
-          </h1>
-          <p className="mt-8 max-w-3xl text-lg leading-8 text-foreground/70 sm:text-xl">
-            MUARÉ — это не просто студия ногтевого сервиса. Это место, где время словно замедляется,
-            а забота ощущается в каждой детали — от мягкого света до первого глотка ароматного чая.
-          </p>
+      <section className="border-b border-line">
+        <Container className="grid min-h-[calc(100svh-5rem)] gap-10 py-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16 lg:py-12">
+          <div className="flex flex-col justify-center py-10">
+            <p className="text-[11px] font-medium uppercase tracking-[0.32em] text-muted">
+              О студии
+            </p>
+            <h1 className="mt-6 max-w-3xl font-serif text-5xl font-light leading-[0.98] sm:text-7xl">
+              Пространство, в котором хочется задержаться
+            </h1>
+            <p className="mt-8 max-w-2xl text-lg leading-8 text-foreground/70">
+              MUARÉ — это не просто студия ногтевого сервиса. Это место, где время словно
+              замедляется, а забота ощущается в каждой детали — от мягкого света до первого глотка
+              ароматного чая.
+            </p>
+          </div>
+          <figure className="relative min-h-[500px] overflow-hidden rounded-[2px] lg:min-h-full">
+            <Image
+              alt="Светлая зона ресепшен студии MUARÉ"
+              className="object-cover"
+              fill
+              priority
+              sizes="(max-width: 1024px) 100vw, 55vw"
+              src="/images/studio/reception.png"
+            />
+          </figure>
         </Container>
       </section>
 
@@ -90,15 +90,15 @@ export default function AboutPage() {
           </div>
         </div>
 
-        <div className="mt-20 grid gap-x-6 gap-y-14 sm:mt-28 sm:grid-cols-2 lg:grid-cols-12 lg:gap-x-8 lg:gap-y-24">
+        <div className="mt-16 grid gap-x-6 gap-y-12 sm:mt-20 sm:grid-cols-2 lg:gap-x-8 lg:gap-y-16">
           {editorialPhotos.map((photo) => (
-            <figure className={photo.className} key={photo.src}>
-              <div className={`relative overflow-hidden rounded-[2px] ${photo.aspect}`}>
+            <figure key={photo.src}>
+              <div className="relative aspect-[4/5] overflow-hidden rounded-[2px]">
                 <Image
                   alt={photo.alt}
                   className="object-cover transition duration-700 hover:scale-[1.015]"
                   fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 58vw"
+                  sizes="(max-width: 640px) 100vw, 50vw"
                   src={photo.src}
                 />
               </div>
@@ -110,19 +110,17 @@ export default function AboutPage() {
         </div>
       </Container>
 
-      <section className="bg-accent py-16 text-white sm:py-24">
+      <section className="border-y border-line bg-background py-16 sm:py-24">
         <Container className="grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
           <div>
-            <p className="text-[11px] font-medium uppercase tracking-[0.32em] text-lemon">
+            <p className="text-[11px] font-medium uppercase tracking-[0.32em] text-accent">
               Почувствуйте атмосферу MUARÉ лично
             </p>
             <h2 className="mt-5 max-w-3xl font-serif text-4xl font-light leading-tight sm:text-6xl">
               Выберите удобное время и позвольте нам позаботиться обо всём остальном.
             </h2>
           </div>
-          <ButtonLink href="/booking" variant="light">
-            Записаться на визит
-          </ButtonLink>
+          <ButtonLink href="/booking">Записаться на визит</ButtonLink>
         </Container>
       </section>
     </main>

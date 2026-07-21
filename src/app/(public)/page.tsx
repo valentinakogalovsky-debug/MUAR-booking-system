@@ -105,23 +105,13 @@ export default function HomePage() {
               </article>
             ))}
           </div>
-          <ButtonLink className="mt-8" href="/services" variant="ghost">
-            Смотреть все услуги
-          </ButtonLink>
-        </Section>
-        <section className="border-y border-line bg-background py-16 sm:py-24">
-          <Container className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
-            <div>
-              <p className="text-[11px] font-medium uppercase tracking-[0.32em] text-accent">
-                Онлайн-запись
-              </p>
-              <h2 className="mt-4 max-w-2xl font-serif text-4xl font-light leading-[1.05] sm:text-6xl">
-                Выберите удобное время для себя
-              </h2>
-            </div>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <ButtonLink href="/services" variant="ghost">
+              Смотреть все услуги
+            </ButtonLink>
             <ButtonLink href="/booking">Записаться</ButtonLink>
-          </Container>
-        </section>
+          </div>
+        </Section>
       </main>
       <SiteFooter />
     </>
