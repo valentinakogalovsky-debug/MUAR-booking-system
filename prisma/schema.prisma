@@ -15,7 +15,6 @@ enum UserStatus {
 enum Role {
   ADMIN
   STAFF
-  CUSTOMER
 }
 
 enum ServiceCategory {
@@ -34,6 +33,7 @@ enum ExceptionType {
 }
 
 enum BookingStatus {
+  PENDING
   CONFIRMED
   COMPLETED
   CANCELLED
@@ -99,7 +99,6 @@ model User {
   updatedAt       DateTime         @updatedAt
   memberships     Membership[]
   staffProfile    StaffProfile?
-  customerProfile CustomerProfile?
   sessions        Session[]
   accounts        Account[]
   createdBookings Booking[]        @relation("BookingCreatedBy")
@@ -144,16 +143,17 @@ model StaffProfile {
 model CustomerProfile {
   id              String       @id @default(uuid()) @db.Uuid
   organizationId  String       @db.Uuid
-  userId          String       @unique @db.Uuid
+  firstName       String
+  lastName        String
+  phone           String
   consentAt       DateTime?
   phoneVerifiedAt DateTime?
   createdAt       DateTime     @default(now())
   updatedAt       DateTime     @updatedAt
   organization    Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
-  user            User         @relation(fields: [userId], references: [id], onDelete: Restrict)
   bookings        Booking[]
 
-  @@index([organizationId])
+  @@unique([organizationId, phone])
 }
 
 model Service {
@@ -245,11 +245,11 @@ model Booking {
   organizationId     String           @db.Uuid
   customerId         String           @db.Uuid
   staffId            String           @db.Uuid
-  createdById        String           @db.Uuid
+  createdById        String?          @db.Uuid
   startAt            DateTime
   endAt              DateTime
   occupiedUntil      DateTime
-  status             BookingStatus    @default(CONFIRMED)
+  status             BookingStatus    @default(PENDING)
   source             BookingSource
   totalPriceMinor    Int
   currency           String           @default("RUB")
@@ -262,7 +262,7 @@ model Booking {
   organization       Organization     @relation(fields: [organizationId], references: [id], onDelete: Restrict)
   customer           CustomerProfile  @relation(fields: [customerId], references: [id], onDelete: Restrict)
   staff              StaffProfile     @relation(fields: [staffId], references: [id], onDelete: Restrict)
-  createdBy          User             @relation("BookingCreatedBy", fields: [createdById], references: [id], onDelete: Restrict)
+  createdBy          User?            @relation("BookingCreatedBy", fields: [createdById], references: [id], onDelete: Restrict)
   services           BookingService[]
   history            BookingHistory[]
   idempotencyKeys    IdempotencyKey[]
@@ -289,13 +289,13 @@ model BookingService {
 model BookingHistory {
   id           String   @id @default(uuid()) @db.Uuid
   bookingId    String   @db.Uuid
-  changedById  String   @db.Uuid
+  changedById  String?  @db.Uuid
   action       String
   previousData Json?
   newData      Json?
   createdAt    DateTime @default(now())
   booking      Booking  @relation(fields: [bookingId], references: [id], onDelete: Restrict)
-  changedBy    User     @relation(fields: [changedById], references: [id], onDelete: Restrict)
+  changedBy    User?    @relation(fields: [changedById], references: [id], onDelete: Restrict)
 
   @@index([bookingId, createdAt])
 }
@@ -319,7 +319,7 @@ model AuditLog {
 model IdempotencyKey {
   id          String   @id @default(uuid()) @db.Uuid
   key         String   @unique
-  userId      String   @db.Uuid
+  userId      String?  @db.Uuid
   bookingId   String?  @db.Uuid
   requestHash String
   createdAt   DateTime @default(now())

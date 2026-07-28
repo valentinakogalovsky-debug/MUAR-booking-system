@@ -33,9 +33,6 @@ export function SiteFooter() {
             <Link className="transition hover:text-accent" href="/booking">
               Записаться онлайн
             </Link>
-            <Link className="transition hover:text-accent" href="/my-bookings">
-              Мои записи
-            </Link>
             <Link className="transition hover:text-accent" href="/faq">
               Частые вопросы
             </Link>

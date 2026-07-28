@@ -162,7 +162,7 @@ export type IdempotencyKeyGroupByArgs<ExtArgs extends runtime.Types.Extensions.I
 export type IdempotencyKeyGroupByOutputType = {
   id: string
   key: string
-  userId: string
+  userId: string | null
   bookingId: string | null
   requestHash: string
   createdAt: Date
@@ -193,7 +193,7 @@ export type IdempotencyKeyWhereInput = {
   NOT?: Prisma.IdempotencyKeyWhereInput | Prisma.IdempotencyKeyWhereInput[]
   id?: Prisma.UuidFilter<"IdempotencyKey"> | string
   key?: Prisma.StringFilter<"IdempotencyKey"> | string
-  userId?: Prisma.UuidFilter<"IdempotencyKey"> | string
+  userId?: Prisma.UuidNullableFilter<"IdempotencyKey"> | string | null
   bookingId?: Prisma.UuidNullableFilter<"IdempotencyKey"> | string | null
   requestHash?: Prisma.StringFilter<"IdempotencyKey"> | string
   createdAt?: Prisma.DateTimeFilter<"IdempotencyKey"> | Date | string
@@ -204,7 +204,7 @@ export type IdempotencyKeyWhereInput = {
 export type IdempotencyKeyOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   key?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
+  userId?: Prisma.SortOrderInput | Prisma.SortOrder
   bookingId?: Prisma.SortOrderInput | Prisma.SortOrder
   requestHash?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -218,7 +218,7 @@ export type IdempotencyKeyWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.IdempotencyKeyWhereInput | Prisma.IdempotencyKeyWhereInput[]
   OR?: Prisma.IdempotencyKeyWhereInput[]
   NOT?: Prisma.IdempotencyKeyWhereInput | Prisma.IdempotencyKeyWhereInput[]
-  userId?: Prisma.UuidFilter<"IdempotencyKey"> | string
+  userId?: Prisma.UuidNullableFilter<"IdempotencyKey"> | string | null
   bookingId?: Prisma.UuidNullableFilter<"IdempotencyKey"> | string | null
   requestHash?: Prisma.StringFilter<"IdempotencyKey"> | string
   createdAt?: Prisma.DateTimeFilter<"IdempotencyKey"> | Date | string
@@ -229,7 +229,7 @@ export type IdempotencyKeyWhereUniqueInput = Prisma.AtLeast<{
 export type IdempotencyKeyOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   key?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
+  userId?: Prisma.SortOrderInput | Prisma.SortOrder
   bookingId?: Prisma.SortOrderInput | Prisma.SortOrder
   requestHash?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -245,7 +245,7 @@ export type IdempotencyKeyScalarWhereWithAggregatesInput = {
   NOT?: Prisma.IdempotencyKeyScalarWhereWithAggregatesInput | Prisma.IdempotencyKeyScalarWhereWithAggregatesInput[]
   id?: Prisma.UuidWithAggregatesFilter<"IdempotencyKey"> | string
   key?: Prisma.StringWithAggregatesFilter<"IdempotencyKey"> | string
-  userId?: Prisma.UuidWithAggregatesFilter<"IdempotencyKey"> | string
+  userId?: Prisma.UuidNullableWithAggregatesFilter<"IdempotencyKey"> | string | null
   bookingId?: Prisma.UuidNullableWithAggregatesFilter<"IdempotencyKey"> | string | null
   requestHash?: Prisma.StringWithAggregatesFilter<"IdempotencyKey"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"IdempotencyKey"> | Date | string
@@ -255,7 +255,7 @@ export type IdempotencyKeyScalarWhereWithAggregatesInput = {
 export type IdempotencyKeyCreateInput = {
   id?: string
   key: string
-  userId: string
+  userId?: string | null
   requestHash: string
   createdAt?: Date | string
   expiresAt: Date | string
@@ -265,7 +265,7 @@ export type IdempotencyKeyCreateInput = {
 export type IdempotencyKeyUncheckedCreateInput = {
   id?: string
   key: string
-  userId: string
+  userId?: string | null
   bookingId?: string | null
   requestHash: string
   createdAt?: Date | string
@@ -275,7 +275,7 @@ export type IdempotencyKeyUncheckedCreateInput = {
 export type IdempotencyKeyUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requestHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -285,7 +285,7 @@ export type IdempotencyKeyUpdateInput = {
 export type IdempotencyKeyUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bookingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requestHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -295,7 +295,7 @@ export type IdempotencyKeyUncheckedUpdateInput = {
 export type IdempotencyKeyCreateManyInput = {
   id?: string
   key: string
-  userId: string
+  userId?: string | null
   bookingId?: string | null
   requestHash: string
   createdAt?: Date | string
@@ -305,7 +305,7 @@ export type IdempotencyKeyCreateManyInput = {
 export type IdempotencyKeyUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requestHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -314,7 +314,7 @@ export type IdempotencyKeyUpdateManyMutationInput = {
 export type IdempotencyKeyUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bookingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requestHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -406,7 +406,7 @@ export type IdempotencyKeyUncheckedUpdateManyWithoutBookingNestedInput = {
 export type IdempotencyKeyCreateWithoutBookingInput = {
   id?: string
   key: string
-  userId: string
+  userId?: string | null
   requestHash: string
   createdAt?: Date | string
   expiresAt: Date | string
@@ -415,7 +415,7 @@ export type IdempotencyKeyCreateWithoutBookingInput = {
 export type IdempotencyKeyUncheckedCreateWithoutBookingInput = {
   id?: string
   key: string
-  userId: string
+  userId?: string | null
   requestHash: string
   createdAt?: Date | string
   expiresAt: Date | string
@@ -453,7 +453,7 @@ export type IdempotencyKeyScalarWhereInput = {
   NOT?: Prisma.IdempotencyKeyScalarWhereInput | Prisma.IdempotencyKeyScalarWhereInput[]
   id?: Prisma.UuidFilter<"IdempotencyKey"> | string
   key?: Prisma.StringFilter<"IdempotencyKey"> | string
-  userId?: Prisma.UuidFilter<"IdempotencyKey"> | string
+  userId?: Prisma.UuidNullableFilter<"IdempotencyKey"> | string | null
   bookingId?: Prisma.UuidNullableFilter<"IdempotencyKey"> | string | null
   requestHash?: Prisma.StringFilter<"IdempotencyKey"> | string
   createdAt?: Prisma.DateTimeFilter<"IdempotencyKey"> | Date | string
@@ -463,7 +463,7 @@ export type IdempotencyKeyScalarWhereInput = {
 export type IdempotencyKeyCreateManyBookingInput = {
   id?: string
   key: string
-  userId: string
+  userId?: string | null
   requestHash: string
   createdAt?: Date | string
   expiresAt: Date | string
@@ -472,7 +472,7 @@ export type IdempotencyKeyCreateManyBookingInput = {
 export type IdempotencyKeyUpdateWithoutBookingInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requestHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -481,7 +481,7 @@ export type IdempotencyKeyUpdateWithoutBookingInput = {
 export type IdempotencyKeyUncheckedUpdateWithoutBookingInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requestHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -490,7 +490,7 @@ export type IdempotencyKeyUncheckedUpdateWithoutBookingInput = {
 export type IdempotencyKeyUncheckedUpdateManyWithoutBookingInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requestHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -560,7 +560,7 @@ export type $IdempotencyKeyPayload<ExtArgs extends runtime.Types.Extensions.Inte
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     key: string
-    userId: string
+    userId: string | null
     bookingId: string | null
     requestHash: string
     createdAt: Date

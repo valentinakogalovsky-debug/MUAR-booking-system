@@ -104,12 +104,21 @@ async function main() {
     create: { organizationId: organization.id },
   });
 
-  const admin = await upsertUser("Администратор", "MUARÉ", "+79000000000", Role.ADMIN);
-  const customer = await upsertUser("Тестовый", "Клиент", "+79000000010", Role.CUSTOMER);
+  await upsertUser("Администратор", "MUARÉ", "+79000000000", Role.ADMIN);
   const customerProfile = await prisma.customerProfile.upsert({
-    where: { userId: customer.id },
-    update: {},
-    create: { organizationId: organization.id, userId: customer.id },
+    where: {
+      organizationId_phone: {
+        organizationId: organization.id,
+        phone: "+79000000010",
+      },
+    },
+    update: { firstName: "Тестовый", lastName: "Клиент" },
+    create: {
+      organizationId: organization.id,
+      firstName: "Тестовый",
+      lastName: "Клиент",
+      phone: "+79000000010",
+    },
   });
 
   const createdServices = [];
@@ -208,18 +217,22 @@ async function main() {
 
   await prisma.booking.upsert({
     where: { id: bookingId },
-    update: {},
+    update: {
+      createdById: null,
+      status: BookingStatus.PENDING,
+      source: BookingSource.CUSTOMER,
+    },
     create: {
       id: bookingId,
       organizationId: organization.id,
       customerId: customerProfile.id,
       staffId: staff[0].id,
-      createdById: admin.id,
+      createdById: null,
       startAt: new Date("2026-08-01T06:00:00.000Z"),
       endAt: new Date("2026-08-01T07:30:00.000Z"),
       occupiedUntil: new Date("2026-08-01T07:45:00.000Z"),
-      status: BookingStatus.CONFIRMED,
-      source: BookingSource.ADMIN,
+      status: BookingStatus.PENDING,
+      source: BookingSource.CUSTOMER,
       totalPriceMinor: testService.priceMinor,
       services: {
         create: {
@@ -231,7 +244,7 @@ async function main() {
         },
       },
       history: {
-        create: { changedById: admin.id, action: "CREATED", newData: { source: "SEED" } },
+        create: { action: "REQUESTED", newData: { source: "SEED" } },
       },
     },
   });

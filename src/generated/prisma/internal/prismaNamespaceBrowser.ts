@@ -160,7 +160,9 @@ export type StaffProfileScalarFieldEnum = (typeof StaffProfileScalarFieldEnum)[k
 export const CustomerProfileScalarFieldEnum = {
   id: 'id',
   organizationId: 'organizationId',
-  userId: 'userId',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  phone: 'phone',
   consentAt: 'consentAt',
   phoneVerifiedAt: 'phoneVerifiedAt',
   createdAt: 'createdAt',

@@ -3,16 +3,16 @@ import { PageHero } from "@/components/page-hero";
 import { Card } from "@/components/ui/card";
 import { Container } from "@/components/ui/container";
 
-export const metadata: Metadata = { title: "Онлайн-запись" };
-const steps = ["Услуга", "Мастер", "Дата", "Время", "Подтверждение"];
+export const metadata: Metadata = { title: "Заявка на запись" };
+const steps = ["Услуга", "Мастер", "Дата", "Время", "Контакты"];
 
 export default function BookingPage() {
   return (
     <main>
       <PageHero
-        eyebrow="Онлайн-запись"
+        eyebrow="Заявка на запись"
         title="Выберите удобное время"
-        description="Интерфейс записи будет подключён к реальному расписанию после настройки базы данных."
+        description="Выберите свободное время и оставьте контактные данные. Администратор позвонит, чтобы подтвердить запись."
       />
       <Container className="py-16 sm:py-24">
         <ol className="grid gap-3 sm:grid-cols-5">
@@ -24,10 +24,10 @@ export default function BookingPage() {
           ))}
         </ol>
         <Card className="mt-8 text-center">
-          <h2 className="font-serif text-4xl font-light">Модуль готовится к подключению</h2>
+          <h2 className="font-serif text-4xl font-light">Онлайн-заявка готовится к подключению</h2>
           <p className="mx-auto mt-4 max-w-xl text-foreground/75">
             На следующих этапах здесь появятся услуги, мастера и свободные интервалы с шагом 15
-            минут.
+            минут. Выбранное время будет зарезервировано сразу после отправки заявки.
           </p>
         </Card>
       </Container>

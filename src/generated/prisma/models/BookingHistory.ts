@@ -154,7 +154,7 @@ export type BookingHistoryGroupByArgs<ExtArgs extends runtime.Types.Extensions.I
 export type BookingHistoryGroupByOutputType = {
   id: string
   bookingId: string
-  changedById: string
+  changedById: string | null
   action: string
   previousData: runtime.JsonValue | null
   newData: runtime.JsonValue | null
@@ -185,19 +185,19 @@ export type BookingHistoryWhereInput = {
   NOT?: Prisma.BookingHistoryWhereInput | Prisma.BookingHistoryWhereInput[]
   id?: Prisma.UuidFilter<"BookingHistory"> | string
   bookingId?: Prisma.UuidFilter<"BookingHistory"> | string
-  changedById?: Prisma.UuidFilter<"BookingHistory"> | string
+  changedById?: Prisma.UuidNullableFilter<"BookingHistory"> | string | null
   action?: Prisma.StringFilter<"BookingHistory"> | string
   previousData?: Prisma.JsonNullableFilter<"BookingHistory">
   newData?: Prisma.JsonNullableFilter<"BookingHistory">
   createdAt?: Prisma.DateTimeFilter<"BookingHistory"> | Date | string
   booking?: Prisma.XOR<Prisma.BookingScalarRelationFilter, Prisma.BookingWhereInput>
-  changedBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  changedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }
 
 export type BookingHistoryOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   bookingId?: Prisma.SortOrder
-  changedById?: Prisma.SortOrder
+  changedById?: Prisma.SortOrderInput | Prisma.SortOrder
   action?: Prisma.SortOrder
   previousData?: Prisma.SortOrderInput | Prisma.SortOrder
   newData?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -212,19 +212,19 @@ export type BookingHistoryWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.BookingHistoryWhereInput[]
   NOT?: Prisma.BookingHistoryWhereInput | Prisma.BookingHistoryWhereInput[]
   bookingId?: Prisma.UuidFilter<"BookingHistory"> | string
-  changedById?: Prisma.UuidFilter<"BookingHistory"> | string
+  changedById?: Prisma.UuidNullableFilter<"BookingHistory"> | string | null
   action?: Prisma.StringFilter<"BookingHistory"> | string
   previousData?: Prisma.JsonNullableFilter<"BookingHistory">
   newData?: Prisma.JsonNullableFilter<"BookingHistory">
   createdAt?: Prisma.DateTimeFilter<"BookingHistory"> | Date | string
   booking?: Prisma.XOR<Prisma.BookingScalarRelationFilter, Prisma.BookingWhereInput>
-  changedBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  changedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }, "id">
 
 export type BookingHistoryOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   bookingId?: Prisma.SortOrder
-  changedById?: Prisma.SortOrder
+  changedById?: Prisma.SortOrderInput | Prisma.SortOrder
   action?: Prisma.SortOrder
   previousData?: Prisma.SortOrderInput | Prisma.SortOrder
   newData?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -240,7 +240,7 @@ export type BookingHistoryScalarWhereWithAggregatesInput = {
   NOT?: Prisma.BookingHistoryScalarWhereWithAggregatesInput | Prisma.BookingHistoryScalarWhereWithAggregatesInput[]
   id?: Prisma.UuidWithAggregatesFilter<"BookingHistory"> | string
   bookingId?: Prisma.UuidWithAggregatesFilter<"BookingHistory"> | string
-  changedById?: Prisma.UuidWithAggregatesFilter<"BookingHistory"> | string
+  changedById?: Prisma.UuidNullableWithAggregatesFilter<"BookingHistory"> | string | null
   action?: Prisma.StringWithAggregatesFilter<"BookingHistory"> | string
   previousData?: Prisma.JsonNullableWithAggregatesFilter<"BookingHistory">
   newData?: Prisma.JsonNullableWithAggregatesFilter<"BookingHistory">
@@ -254,13 +254,13 @@ export type BookingHistoryCreateInput = {
   newData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   booking: Prisma.BookingCreateNestedOneWithoutHistoryInput
-  changedBy: Prisma.UserCreateNestedOneWithoutBookingHistoryInput
+  changedBy?: Prisma.UserCreateNestedOneWithoutBookingHistoryInput
 }
 
 export type BookingHistoryUncheckedCreateInput = {
   id?: string
   bookingId: string
-  changedById: string
+  changedById?: string | null
   action: string
   previousData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   newData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -274,13 +274,13 @@ export type BookingHistoryUpdateInput = {
   newData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   booking?: Prisma.BookingUpdateOneRequiredWithoutHistoryNestedInput
-  changedBy?: Prisma.UserUpdateOneRequiredWithoutBookingHistoryNestedInput
+  changedBy?: Prisma.UserUpdateOneWithoutBookingHistoryNestedInput
 }
 
 export type BookingHistoryUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   bookingId?: Prisma.StringFieldUpdateOperationsInput | string
-  changedById?: Prisma.StringFieldUpdateOperationsInput | string
+  changedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   action?: Prisma.StringFieldUpdateOperationsInput | string
   previousData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   newData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -290,7 +290,7 @@ export type BookingHistoryUncheckedUpdateInput = {
 export type BookingHistoryCreateManyInput = {
   id?: string
   bookingId: string
-  changedById: string
+  changedById?: string | null
   action: string
   previousData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   newData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -308,7 +308,7 @@ export type BookingHistoryUpdateManyMutationInput = {
 export type BookingHistoryUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   bookingId?: Prisma.StringFieldUpdateOperationsInput | string
-  changedById?: Prisma.StringFieldUpdateOperationsInput | string
+  changedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   action?: Prisma.StringFieldUpdateOperationsInput | string
   previousData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   newData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -485,7 +485,7 @@ export type BookingHistoryScalarWhereInput = {
   NOT?: Prisma.BookingHistoryScalarWhereInput | Prisma.BookingHistoryScalarWhereInput[]
   id?: Prisma.UuidFilter<"BookingHistory"> | string
   bookingId?: Prisma.UuidFilter<"BookingHistory"> | string
-  changedById?: Prisma.UuidFilter<"BookingHistory"> | string
+  changedById?: Prisma.UuidNullableFilter<"BookingHistory"> | string | null
   action?: Prisma.StringFilter<"BookingHistory"> | string
   previousData?: Prisma.JsonNullableFilter<"BookingHistory">
   newData?: Prisma.JsonNullableFilter<"BookingHistory">
@@ -498,12 +498,12 @@ export type BookingHistoryCreateWithoutBookingInput = {
   previousData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   newData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
-  changedBy: Prisma.UserCreateNestedOneWithoutBookingHistoryInput
+  changedBy?: Prisma.UserCreateNestedOneWithoutBookingHistoryInput
 }
 
 export type BookingHistoryUncheckedCreateWithoutBookingInput = {
   id?: string
-  changedById: string
+  changedById?: string | null
   action: string
   previousData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   newData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -574,7 +574,7 @@ export type BookingHistoryUncheckedUpdateManyWithoutChangedByInput = {
 
 export type BookingHistoryCreateManyBookingInput = {
   id?: string
-  changedById: string
+  changedById?: string | null
   action: string
   previousData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   newData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -587,12 +587,12 @@ export type BookingHistoryUpdateWithoutBookingInput = {
   previousData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   newData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  changedBy?: Prisma.UserUpdateOneRequiredWithoutBookingHistoryNestedInput
+  changedBy?: Prisma.UserUpdateOneWithoutBookingHistoryNestedInput
 }
 
 export type BookingHistoryUncheckedUpdateWithoutBookingInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  changedById?: Prisma.StringFieldUpdateOperationsInput | string
+  changedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   action?: Prisma.StringFieldUpdateOperationsInput | string
   previousData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   newData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -601,7 +601,7 @@ export type BookingHistoryUncheckedUpdateWithoutBookingInput = {
 
 export type BookingHistoryUncheckedUpdateManyWithoutBookingInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  changedById?: Prisma.StringFieldUpdateOperationsInput | string
+  changedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   action?: Prisma.StringFieldUpdateOperationsInput | string
   previousData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   newData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -619,7 +619,7 @@ export type BookingHistorySelect<ExtArgs extends runtime.Types.Extensions.Intern
   newData?: boolean
   createdAt?: boolean
   booking?: boolean | Prisma.BookingDefaultArgs<ExtArgs>
-  changedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  changedBy?: boolean | Prisma.BookingHistory$changedByArgs<ExtArgs>
 }, ExtArgs["result"]["bookingHistory"]>
 
 export type BookingHistorySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -631,7 +631,7 @@ export type BookingHistorySelectCreateManyAndReturn<ExtArgs extends runtime.Type
   newData?: boolean
   createdAt?: boolean
   booking?: boolean | Prisma.BookingDefaultArgs<ExtArgs>
-  changedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  changedBy?: boolean | Prisma.BookingHistory$changedByArgs<ExtArgs>
 }, ExtArgs["result"]["bookingHistory"]>
 
 export type BookingHistorySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -643,7 +643,7 @@ export type BookingHistorySelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   newData?: boolean
   createdAt?: boolean
   booking?: boolean | Prisma.BookingDefaultArgs<ExtArgs>
-  changedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  changedBy?: boolean | Prisma.BookingHistory$changedByArgs<ExtArgs>
 }, ExtArgs["result"]["bookingHistory"]>
 
 export type BookingHistorySelectScalar = {
@@ -659,27 +659,27 @@ export type BookingHistorySelectScalar = {
 export type BookingHistoryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "bookingId" | "changedById" | "action" | "previousData" | "newData" | "createdAt", ExtArgs["result"]["bookingHistory"]>
 export type BookingHistoryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   booking?: boolean | Prisma.BookingDefaultArgs<ExtArgs>
-  changedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  changedBy?: boolean | Prisma.BookingHistory$changedByArgs<ExtArgs>
 }
 export type BookingHistoryIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   booking?: boolean | Prisma.BookingDefaultArgs<ExtArgs>
-  changedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  changedBy?: boolean | Prisma.BookingHistory$changedByArgs<ExtArgs>
 }
 export type BookingHistoryIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   booking?: boolean | Prisma.BookingDefaultArgs<ExtArgs>
-  changedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  changedBy?: boolean | Prisma.BookingHistory$changedByArgs<ExtArgs>
 }
 
 export type $BookingHistoryPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "BookingHistory"
   objects: {
     booking: Prisma.$BookingPayload<ExtArgs>
-    changedBy: Prisma.$UserPayload<ExtArgs>
+    changedBy: Prisma.$UserPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     bookingId: string
-    changedById: string
+    changedById: string | null
     action: string
     previousData: runtime.JsonValue | null
     newData: runtime.JsonValue | null
@@ -1079,7 +1079,7 @@ readonly fields: BookingHistoryFieldRefs;
 export interface Prisma__BookingHistoryClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   booking<T extends Prisma.BookingDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BookingDefaultArgs<ExtArgs>>): Prisma.Prisma__BookingClient<runtime.Types.Result.GetResult<Prisma.$BookingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  changedBy<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  changedBy<T extends Prisma.BookingHistory$changedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BookingHistory$changedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1514,6 +1514,25 @@ export type BookingHistoryDeleteManyArgs<ExtArgs extends runtime.Types.Extension
    * Limit how many BookingHistories to delete.
    */
   limit?: number
+}
+
+/**
+ * BookingHistory.changedBy
+ */
+export type BookingHistory$changedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**

@@ -19,8 +19,7 @@ export type UserStatus = (typeof UserStatus)[keyof typeof UserStatus]
 
 export const Role = {
   ADMIN: 'ADMIN',
-  STAFF: 'STAFF',
-  CUSTOMER: 'CUSTOMER'
+  STAFF: 'STAFF'
 } as const
 
 export type Role = (typeof Role)[keyof typeof Role]
@@ -51,6 +50,7 @@ export type ExceptionType = (typeof ExceptionType)[keyof typeof ExceptionType]
 
 
 export const BookingStatus = {
+  PENDING: 'PENDING',
   CONFIRMED: 'CONFIRMED',
   COMPLETED: 'COMPLETED',
   CANCELLED: 'CANCELLED',
