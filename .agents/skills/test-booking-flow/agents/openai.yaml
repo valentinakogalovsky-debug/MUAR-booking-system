@@ -1,0 +1,4 @@
+interface:
+  display_name: "Тест заявки"
+  short_description: "Проверяет путь заявки от UI до PostgreSQL"
+  default_prompt: "Use -booking-flow to verify the complete MUARÉ booking request flow."

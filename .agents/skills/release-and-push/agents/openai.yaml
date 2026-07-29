@@ -1,0 +1,4 @@
+interface:
+  display_name: "Релиз и push"
+  short_description: "Готовит проверенный commit и push по запросу"
+  default_prompt: "Use -and-push to publish verified MUARÉ changes safely."

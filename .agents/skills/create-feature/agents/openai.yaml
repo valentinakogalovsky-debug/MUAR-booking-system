@@ -1,3 +1,4 @@
 interface:
-  display_name: "Create Feature"
-  short_description: "Help with Create Feature tasks"
+  display_name: "Создание функции"
+  short_description: "Реализует одну функцию по spec.md и PLAN.md"
+  default_prompt: "Use -feature to build one scoped MUARÉ feature."

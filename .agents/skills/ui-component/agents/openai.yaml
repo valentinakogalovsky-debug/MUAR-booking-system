@@ -1,3 +1,4 @@
 interface:
-  display_name: "UI Component"
-  short_description: "Help with UI Component tasks"
+  display_name: "UI-компонент"
+  short_description: "Меняет интерфейс в дизайн-системе MUARÉ"
+  default_prompt: "Use -component to make a scoped MUARÉ interface change."

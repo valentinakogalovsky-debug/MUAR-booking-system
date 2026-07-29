@@ -1,0 +1,4 @@
+interface:
+  display_name: "Доступность записи"
+  short_description: "Безопасно меняет расчёт свободных интервалов"
+  default_prompt: "Use -availability to implement or review MUARÉ slot calculation."

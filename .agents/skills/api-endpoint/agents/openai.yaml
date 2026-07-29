@@ -1,3 +1,4 @@
 interface:
-  display_name: "API Endpoint"
-  short_description: "Help with API Endpoint tasks"
+  display_name: "Серверный контракт"
+  short_description: "Проектирует безопасный API или Server Action"
+  default_prompt: "Use -endpoint to implement a MUARÉ server endpoint."

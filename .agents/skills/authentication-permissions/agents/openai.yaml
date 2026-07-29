@@ -1,0 +1,4 @@
+interface:
+  display_name: "Вход и права"
+  short_description: "Защищает вход и серверные границы ролей"
+  default_prompt: "Use -permissions to implement MUARÉ staff authentication and permissions."

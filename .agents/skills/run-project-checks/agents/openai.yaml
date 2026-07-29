@@ -1,0 +1,4 @@
+interface:
+  display_name: "Проверки проекта"
+  short_description: "Запускает проверки без скрытия ошибок"
+  default_prompt: "Use -project-checks to verify the MUARÉ project before completion."

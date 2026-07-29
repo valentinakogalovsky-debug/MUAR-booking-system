@@ -1,3 +1,4 @@
 interface:
-  display_name: "Prisma Migration"
-  short_description: "Help with Prisma Migration tasks"
+  display_name: "Prisma-миграция"
+  short_description: "Безопасно изменяет схему и миграции PostgreSQL"
+  default_prompt: "Use -migration to change the MUARÉ database schema safely."

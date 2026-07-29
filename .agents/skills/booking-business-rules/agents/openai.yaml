@@ -1,3 +1,4 @@
 interface:
-  display_name: "Booking Business Rules"
-  short_description: "Help with Booking Business Rules tasks"
+  display_name: "Правила записи"
+  short_description: "Проверяет изменения по спецификации MUARÉ"
+  default_prompt: "Use -business-rules to verify a booking change against spec.md."

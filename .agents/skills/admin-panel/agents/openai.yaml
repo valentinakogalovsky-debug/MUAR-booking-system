@@ -1,3 +1,4 @@
 interface:
-  display_name: "Admin Panel"
-  short_description: "Help with Admin Panel tasks"
+  display_name: "Административная панель"
+  short_description: "Безопасно реализует функции администратора"
+  default_prompt: "Use -panel to implement a scoped MUARÉ admin workflow."

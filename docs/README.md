@@ -5,14 +5,17 @@
 
 Документы используют единую нумерацию, терминологию и модель MVP:
 
-1. [PRD](./PRD.md) — что создаём и где проходят границы продукта.
-2. [Business Rules](./BUSINESS_RULES.md) — обязательные правила студии и записи.
-3. [UX Specification](./UX_SPECIFICATION.md) — экраны, действия, состояния и переходы.
-4. [Data Model](./DATA_MODEL.md) — сущности, связи и ограничения PostgreSQL.
-5. [API Specification](./API_SPECIFICATION.md) — серверные контракты.
-6. [Architecture](./ARCHITECTURE.md) — модули, зависимости и безопасность.
-7. [PLAN.md](../PLAN.md) — последовательность разработки и текущий статус.
-8. [Content Specification](./source/muare-content-spec.html) — контент сайта.
-9. [Brand & Design Guide](./source/muare-brand-guide.html) — визуальная система.
+1. [spec.md](../spec.md) — утверждённый источник продуктовых требований.
+2. [PLAN.md](../PLAN.md) — последовательность разработки и текущий статус.
+3. [PRD](./PRD.md) — развёрнутое описание продукта и его границ.
+4. [Business Rules](./BUSINESS_RULES.md) — подробные правила студии и записи.
+5. [UX Specification](./UX_SPECIFICATION.md) — экраны, действия, состояния и переходы.
+6. [Data Model](./DATA_MODEL.md) — сущности, связи и ограничения PostgreSQL.
+7. [API Specification](./API_SPECIFICATION.md) — серверные контракты.
+8. [Architecture](./ARCHITECTURE.md) — модули, зависимости и безопасность.
+9. [Content Specification](./source/muare-content-spec.html) — контент сайта.
+10. [Brand & Design Guide](./source/muare-brand-guide.html) — визуальная система.
 
-При расхождении документов приоритет имеет `PLAN.md`, затем Business Rules.
+`spec.md` определяет продукт, а `PLAN.md` — порядок реализации. При конфликте
+между ними работа останавливается: ИИ сообщает о противоречии и не выбирает вариант
+без решения пользователя.

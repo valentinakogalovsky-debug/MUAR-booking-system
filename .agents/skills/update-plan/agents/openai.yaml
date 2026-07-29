@@ -1,3 +1,4 @@
 interface:
-  display_name: "Update Plan"
-  short_description: "Help with Update Plan tasks"
+  display_name: "Обновление плана"
+  short_description: "Синхронизирует статус реализации и документы"
+  default_prompt: "Use -plan to record a verified MUARÉ implementation stage."

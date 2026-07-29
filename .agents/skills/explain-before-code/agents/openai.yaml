@@ -1,3 +1,4 @@
 interface:
-  display_name: "Explain Before Code"
-  short_description: "Help with Explain Before Code tasks"
+  display_name: "Сначала объяснить"
+  short_description: "Поясняет рисковое изменение до редактирования"
+  default_prompt: "Use -before-code to assess a MUARÉ change before editing."

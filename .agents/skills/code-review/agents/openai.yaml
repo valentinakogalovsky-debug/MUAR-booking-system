@@ -1,3 +1,4 @@
 interface:
-  display_name: "Code Review"
-  short_description: "Help with Code Review tasks"
+  display_name: "Ревью кода"
+  short_description: "Ищет риски, регрессии и нарушения требований"
+  default_prompt: "Use -review to review MUARÉ changes by risk and specification."
