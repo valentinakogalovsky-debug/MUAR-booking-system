@@ -9,6 +9,7 @@ const links = [
   ["Обзор", "/admin"],
   ["Услуги", "/admin/catalog"],
   ["Мастера", "/admin/staff"],
+  ["Графики", "/admin/schedule"],
   ["Настройки", "/admin/settings"],
   ["Журнал", "/admin/audit"],
 ] as const;

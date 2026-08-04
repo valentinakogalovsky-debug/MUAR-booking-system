@@ -15,6 +15,7 @@ import {
   updateService,
 } from "@/lib/admin/catalog";
 import { updateSettings } from "@/lib/admin/settings";
+import { createException, removeException } from "@/lib/admin/schedule";
 import { updateStaff } from "@/lib/admin/staff";
 import { requireRole } from "@/lib/auth/permissions";
 
@@ -28,7 +29,8 @@ function values(formData: FormData) {
 }
 
 async function complete(operation: () => Promise<unknown>, path: string, success: string) {
-  let location = `${path}?success=${encodeURIComponent(success)}`;
+  const separator = path.includes("?") ? "&" : "?";
+  let location = `${path}${separator}success=${encodeURIComponent(success)}`;
   try {
     await operation();
     revalidatePath(path);
@@ -37,7 +39,7 @@ async function complete(operation: () => Promise<unknown>, path: string, success
       error instanceof ZodError
         ? error.issues[0]?.message || "Проверьте заполненные поля"
         : "Не удалось сохранить изменения";
-    location = `${path}?error=${encodeURIComponent(message)}`;
+    location = `${path}${separator}error=${encodeURIComponent(message)}`;
   }
   redirect(location);
 }
@@ -131,5 +133,23 @@ export async function updateStaffAction(formData: FormData) {
     () => updateStaff(admin, formData.get("id"), values(formData)),
     "/admin/staff",
     "Данные мастера сохранены",
+  );
+}
+
+export async function createExceptionAction(formData: FormData) {
+  const admin = await actor();
+  await complete(
+    () => createException(admin, values(formData)),
+    `/admin/schedule?date=${encodeURIComponent(String(formData.get("dateFrom") || ""))}`,
+    "Изменение графика добавлено",
+  );
+}
+
+export async function removeExceptionAction(formData: FormData) {
+  const admin = await actor();
+  await complete(
+    () => removeException(admin, String(formData.get("id"))),
+    `/admin/schedule?date=${encodeURIComponent(String(formData.get("date") || ""))}`,
+    "Изменение графика удалено",
   );
 }

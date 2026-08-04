@@ -17,6 +17,8 @@ const actionNames: Record<string, string> = {
   STAFF_UPDATED: "Изменён мастер",
   STAFF_DEACTIVATED: "Мастер отключён",
   SETTINGS_UPDATED: "Изменены настройки записи",
+  SCHEDULE_EXCEPTION_CREATED: "Добавлено изменение графика",
+  SCHEDULE_EXCEPTION_DELETED: "Удалено изменение графика",
 };
 
 export default async function AuditPage() {

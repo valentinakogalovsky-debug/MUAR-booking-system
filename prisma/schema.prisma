@@ -61,8 +61,8 @@ model Organization {
   timezone    String                  @default("Europe/Moscow")
   address     String
   phone       String
-  createdAt   DateTime                @default(now())
-  updatedAt   DateTime                @updatedAt
+  createdAt   DateTime                @default(now()) @db.Timestamptz(3)
+  updatedAt   DateTime                @updatedAt @db.Timestamptz(3)
   settings    OrganizationSettings?
   memberships Membership[]
   staff       StaffProfile[]
@@ -83,8 +83,8 @@ model OrganizationSettings {
   rescheduleLimitMinutes   Int          @default(480)
   slotStepMinutes          Int          @default(15)
   technicalBreakMinutes    Int          @default(15)
-  createdAt                DateTime     @default(now())
-  updatedAt                DateTime     @updatedAt
+  createdAt                DateTime     @default(now()) @db.Timestamptz(3)
+  updatedAt                DateTime     @updatedAt @db.Timestamptz(3)
   organization             Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
 }
 
@@ -95,8 +95,8 @@ model User {
   phone           String           @unique
   passwordHash    String?
   status          UserStatus       @default(ACTIVE)
-  createdAt       DateTime         @default(now())
-  updatedAt       DateTime         @updatedAt
+  createdAt       DateTime         @default(now()) @db.Timestamptz(3)
+  updatedAt       DateTime         @updatedAt @db.Timestamptz(3)
   memberships     Membership[]
   staffProfile    StaffProfile?
   sessions        Session[]
@@ -111,8 +111,8 @@ model Membership {
   organizationId String       @db.Uuid
   userId         String       @db.Uuid
   role           Role
-  createdAt      DateTime     @default(now())
-  updatedAt      DateTime     @updatedAt
+  createdAt      DateTime     @default(now()) @db.Timestamptz(3)
+  updatedAt      DateTime     @updatedAt @db.Timestamptz(3)
   organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
   user           User         @relation(fields: [userId], references: [id], onDelete: Restrict)
 
@@ -127,8 +127,8 @@ model StaffProfile {
   displayName    String
   slug           String
   isActive       Boolean                 @default(true)
-  createdAt      DateTime                @default(now())
-  updatedAt      DateTime                @updatedAt
+  createdAt      DateTime                @default(now()) @db.Timestamptz(3)
+  updatedAt      DateTime                @updatedAt @db.Timestamptz(3)
   organization   Organization            @relation(fields: [organizationId], references: [id], onDelete: Restrict)
   user           User                    @relation(fields: [userId], references: [id], onDelete: Restrict)
   services       StaffService[]
@@ -146,10 +146,10 @@ model CustomerProfile {
   firstName       String
   lastName        String
   phone           String
-  consentAt       DateTime?
-  phoneVerifiedAt DateTime?
-  createdAt       DateTime     @default(now())
-  updatedAt       DateTime     @updatedAt
+  consentAt       DateTime?    @db.Timestamptz(3)
+  phoneVerifiedAt DateTime?    @db.Timestamptz(3)
+  createdAt       DateTime     @default(now()) @db.Timestamptz(3)
+  updatedAt       DateTime     @updatedAt @db.Timestamptz(3)
   organization    Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
   bookings        Booking[]
 
@@ -166,8 +166,8 @@ model Service {
   priceMinor      Int
   currency        String           @default("RUB")
   isActive        Boolean          @default(true)
-  createdAt       DateTime         @default(now())
-  updatedAt       DateTime         @updatedAt
+  createdAt       DateTime         @default(now()) @db.Timestamptz(3)
+  updatedAt       DateTime         @updatedAt @db.Timestamptz(3)
   organization    Organization     @relation(fields: [organizationId], references: [id], onDelete: Restrict)
   staff           StaffService[]
   bookingItems    BookingService[]
@@ -185,8 +185,8 @@ model ServiceAddon {
   isIncluded        Boolean      @default(false)
   affectsDuration   Boolean      @default(false)
   isActive          Boolean      @default(true)
-  createdAt         DateTime     @default(now())
-  updatedAt         DateTime     @updatedAt
+  createdAt         DateTime     @default(now()) @db.Timestamptz(3)
+  updatedAt         DateTime     @updatedAt @db.Timestamptz(3)
   organization      Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
 
   @@unique([organizationId, name])
@@ -195,7 +195,7 @@ model ServiceAddon {
 model StaffService {
   staffId   String       @db.Uuid
   serviceId String       @db.Uuid
-  createdAt DateTime     @default(now())
+  createdAt DateTime     @default(now()) @db.Timestamptz(3)
   staff     StaffProfile @relation(fields: [staffId], references: [id], onDelete: Cascade)
   service   Service      @relation(fields: [serviceId], references: [id], onDelete: Cascade)
 
@@ -216,8 +216,8 @@ model SchedulePattern {
   endMinute        Int
   validFrom        DateTime     @db.Date
   validUntil       DateTime?    @db.Date
-  createdAt        DateTime     @default(now())
-  updatedAt        DateTime     @updatedAt
+  createdAt        DateTime     @default(now()) @db.Timestamptz(3)
+  updatedAt        DateTime     @updatedAt @db.Timestamptz(3)
   organization     Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
   staff            StaffProfile @relation(fields: [staffId], references: [id], onDelete: Restrict)
 
@@ -229,11 +229,11 @@ model AvailabilityException {
   organizationId String        @db.Uuid
   staffId        String        @db.Uuid
   type           ExceptionType
-  startAt        DateTime
-  endAt          DateTime
+  startAt        DateTime      @db.Timestamptz(3)
+  endAt          DateTime      @db.Timestamptz(3)
   reason         String?
-  createdAt      DateTime      @default(now())
-  updatedAt      DateTime      @updatedAt
+  createdAt      DateTime      @default(now()) @db.Timestamptz(3)
+  updatedAt      DateTime      @updatedAt @db.Timestamptz(3)
   organization   Organization  @relation(fields: [organizationId], references: [id], onDelete: Restrict)
   staff          StaffProfile  @relation(fields: [staffId], references: [id], onDelete: Restrict)
 
@@ -246,19 +246,19 @@ model Booking {
   customerId         String           @db.Uuid
   staffId            String           @db.Uuid
   createdById        String?          @db.Uuid
-  startAt            DateTime
-  endAt              DateTime
-  occupiedUntil      DateTime
+  startAt            DateTime         @db.Timestamptz(3)
+  endAt              DateTime         @db.Timestamptz(3)
+  occupiedUntil      DateTime         @db.Timestamptz(3)
   status             BookingStatus    @default(PENDING)
   source             BookingSource
   totalPriceMinor    Int
   currency           String           @default("RUB")
   customerComment    String?
   internalComment    String?
-  cancelledAt        DateTime?
+  cancelledAt        DateTime?        @db.Timestamptz(3)
   cancellationReason String?
-  createdAt          DateTime         @default(now())
-  updatedAt          DateTime         @updatedAt
+  createdAt          DateTime         @default(now()) @db.Timestamptz(3)
+  updatedAt          DateTime         @updatedAt @db.Timestamptz(3)
   organization       Organization     @relation(fields: [organizationId], references: [id], onDelete: Restrict)
   customer           CustomerProfile  @relation(fields: [customerId], references: [id], onDelete: Restrict)
   staff              StaffProfile     @relation(fields: [staffId], references: [id], onDelete: Restrict)
@@ -293,7 +293,7 @@ model BookingHistory {
   action       String
   previousData Json?
   newData      Json?
-  createdAt    DateTime @default(now())
+  createdAt    DateTime @default(now()) @db.Timestamptz(3)
   booking      Booking  @relation(fields: [bookingId], references: [id], onDelete: Restrict)
   changedBy    User?    @relation(fields: [changedById], references: [id], onDelete: Restrict)
 
@@ -308,7 +308,7 @@ model AuditLog {
   entityType     AuditEntityType
   entityId       String
   metadata       Json?
-  createdAt      DateTime        @default(now())
+  createdAt      DateTime        @default(now()) @db.Timestamptz(3)
   organization   Organization    @relation(fields: [organizationId], references: [id], onDelete: Restrict)
   user           User?           @relation(fields: [userId], references: [id], onDelete: SetNull)
 
@@ -322,8 +322,8 @@ model IdempotencyKey {
   userId      String?  @db.Uuid
   bookingId   String?  @db.Uuid
   requestHash String
-  createdAt   DateTime @default(now())
-  expiresAt   DateTime
+  createdAt   DateTime @default(now()) @db.Timestamptz(3)
+  expiresAt   DateTime @db.Timestamptz(3)
   booking     Booking? @relation(fields: [bookingId], references: [id], onDelete: SetNull)
 
   @@index([userId, expiresAt])
@@ -347,14 +347,14 @@ model Session {
   id           String   @id @default(uuid()) @db.Uuid
   sessionToken String   @unique
   userId       String   @db.Uuid
-  expires      DateTime
+  expires      DateTime @db.Timestamptz(3)
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model VerificationToken {
   identifier String
   token      String   @unique
-  expires    DateTime
+  expires    DateTime @db.Timestamptz(3)
 
   @@unique([identifier, token])
 }
