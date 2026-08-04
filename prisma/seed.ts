@@ -25,17 +25,24 @@ const organizationId = "5eacb202-9b01-4aaf-bc8b-b66a2d6f5c01";
 const bookingId = "a040d71a-66bd-4a94-a282-0ef1f9ee1030";
 
 const services = [
-  [ServiceCategory.MANICURE, "Аппаратный маникюр (без покрытия)", 60, 2500],
+  [ServiceCategory.MANICURE, "Аппаратный маникюр без покрытия", 60, 2500],
   [ServiceCategory.MANICURE, "Мужской маникюр", 60, 2500],
-  [ServiceCategory.MANICURE, "Комбинированный маникюр (без покрытия)", 180, 5000],
+  [ServiceCategory.MANICURE, "Комбинированный маникюр без покрытия", 180, 5000],
   [ServiceCategory.MANICURE, "Комбинированный маникюр с покрытием гель-лаком", 180, 7000],
   [ServiceCategory.MANICURE, "Маникюр с покрытием гель-лак", 90, 3500],
   [ServiceCategory.MANICURE, "Маникюр с укреплением базой/гелем", 60, 4200],
-  [ServiceCategory.PEDICURE, "Аппаратный педикюр (без покрытия)", 60, 3800],
+  [ServiceCategory.PEDICURE, "Аппаратный педикюр без покрытия", 60, 3800],
   [ServiceCategory.PEDICURE, "Педикюр с покрытием", 90, 4800],
-  [ServiceCategory.PEDICURE, "Экспресс-педикюр (пальчики)", 60, 3200],
+  [ServiceCategory.PEDICURE, "Экспресс-педикюр — пальчики", 60, 3200],
   [ServiceCategory.PEDICURE, "SPA-педикюр премиум", 180, 6000],
 ] as const;
+
+const legacyServiceNames = new Map([
+  ["Аппаратный маникюр без покрытия", "Аппаратный маникюр (без покрытия)"],
+  ["Комбинированный маникюр без покрытия", "Комбинированный маникюр (без покрытия)"],
+  ["Аппаратный педикюр без покрытия", "Аппаратный педикюр (без покрытия)"],
+  ["Экспресс-педикюр — пальчики", "Экспресс-педикюр (пальчики)"],
+]);
 
 const addons = [
   { name: "Снятие своего покрытия", isIncluded: true },
@@ -126,18 +133,33 @@ async function main() {
 
   const createdServices = [];
   for (const [category, name, durationMinutes, priceRubles] of services) {
+    const existingService = await prisma.service.findFirst({
+      where: {
+        organizationId: organization.id,
+        name: { in: [name, legacyServiceNames.get(name)].filter((item): item is string => !!item) },
+      },
+    });
     createdServices.push(
-      await prisma.service.upsert({
-        where: { organizationId_name: { organizationId: organization.id, name } },
-        update: { category, durationMinutes, priceMinor: priceRubles * 100, isActive: true },
-        create: {
-          organizationId: organization.id,
-          category,
-          name,
-          durationMinutes,
-          priceMinor: priceRubles * 100,
-        },
-      }),
+      existingService
+        ? await prisma.service.update({
+            where: { id: existingService.id },
+            data: {
+              name,
+              category,
+              durationMinutes,
+              priceMinor: priceRubles * 100,
+              isActive: true,
+            },
+          })
+        : await prisma.service.create({
+            data: {
+              organizationId: organization.id,
+              category,
+              name,
+              durationMinutes,
+              priceMinor: priceRubles * 100,
+            },
+          }),
     );
   }
 
