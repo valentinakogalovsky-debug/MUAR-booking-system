@@ -1,6 +1,7 @@
 import "dotenv/config";
 
 import { PrismaPg } from "@prisma/adapter-pg";
+import { hash } from "bcryptjs";
 import {
   BookingSource,
   BookingStatus,
@@ -80,6 +81,8 @@ const masters = [
 ] as const;
 
 async function main() {
+  const seedStaffPassword = process.env.SEED_STAFF_PASSWORD;
+  const passwordHash = seedStaffPassword ? await hash(seedStaffPassword, 12) : undefined;
   const organization = await prisma.organization.upsert({
     where: { slug: "muare" },
     update: {
@@ -104,7 +107,7 @@ async function main() {
     create: { organizationId: organization.id },
   });
 
-  await upsertUser("Администратор", "MUARÉ", "+79000000000", Role.ADMIN);
+  await ensureAdmin("+79038184486", passwordHash);
   const customerProfile = await prisma.customerProfile.upsert({
     where: {
       organizationId_phone: {
@@ -148,7 +151,13 @@ async function main() {
 
   const staff = [];
   for (const master of masters) {
-    const user = await upsertUser(master.firstName, master.lastName, master.phone, Role.STAFF);
+    const user = await upsertUser(
+      master.firstName,
+      master.lastName,
+      master.phone,
+      Role.STAFF,
+      passwordHash,
+    );
     const profile = await prisma.staffProfile.upsert({
       where: { userId: user.id },
       update: {
@@ -167,7 +176,13 @@ async function main() {
     await ensureRotatingSchedule(profile.id, master.anchorDate);
   }
 
-  const tatyanaUser = await upsertUser("Татьяна", "Кравченко", "+79000000005", Role.STAFF);
+  const tatyanaUser = await upsertUser(
+    "Татьяна",
+    "Кравченко",
+    "+79000000005",
+    Role.STAFF,
+    passwordHash,
+  );
   const tatyana = await prisma.staffProfile.upsert({
     where: { userId: tatyanaUser.id },
     update: { displayName: "Татьяна Кравченко", slug: "tatyana-kravchenko", isActive: true },
@@ -254,11 +269,17 @@ async function main() {
   );
 }
 
-async function upsertUser(firstName: string, lastName: string, phone: string, role: Role) {
+async function upsertUser(
+  firstName: string,
+  lastName: string,
+  phone: string,
+  role: Role,
+  passwordHash?: string,
+) {
   const user = await prisma.user.upsert({
     where: { phone },
-    update: { firstName, lastName },
-    create: { firstName, lastName, phone },
+    update: { firstName, lastName, ...(passwordHash ? { passwordHash } : {}) },
+    create: { firstName, lastName, phone, passwordHash },
   });
   await prisma.membership.upsert({
     where: { organizationId_userId: { organizationId, userId: user.id } },
@@ -266,6 +287,27 @@ async function upsertUser(firstName: string, lastName: string, phone: string, ro
     create: { organizationId, userId: user.id, role },
   });
   return user;
+}
+
+async function ensureAdmin(phone: string, passwordHash?: string) {
+  const existingAdmin = await prisma.membership.findFirst({
+    where: { organizationId, role: Role.ADMIN },
+    select: { userId: true },
+  });
+
+  if (existingAdmin) {
+    return prisma.user.update({
+      where: { id: existingAdmin.userId },
+      data: {
+        firstName: "Администратор",
+        lastName: "MUARÉ",
+        phone,
+        ...(passwordHash ? { passwordHash } : {}),
+      },
+    });
+  }
+
+  return upsertUser("Администратор", "MUARÉ", phone, Role.ADMIN, passwordHash);
 }
 
 async function ensureRotatingSchedule(staffId: string, anchorDate: string) {
