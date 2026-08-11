@@ -56,6 +56,9 @@ export default async function ServicesPage() {
                     <p className="mt-5 text-xs uppercase tracking-[0.18em] text-muted">
                       {service.durationMinutes} минут
                     </p>
+                    <ButtonLink className="mt-6" href={`/booking?service=${service.id}`}>
+                      Выбрать дату
+                    </ButtonLink>
                   </Card>
                 ))}
             </div>

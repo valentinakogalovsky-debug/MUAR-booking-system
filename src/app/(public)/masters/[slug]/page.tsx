@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { ButtonLink } from "@/components/ui/button";
+import { BookingForm } from "@/components/booking/booking-form";
 import { Container } from "@/components/ui/container";
 import { getDb } from "@/lib/db";
 
@@ -21,7 +21,7 @@ export default async function MasterPage({ params }: MasterPageProps) {
   const { slug } = await params;
   const master = await getDb().staffProfile.findFirst({
     where: { slug, organization: { slug: "muare" }, isActive: true },
-    select: { slug: true, displayName: true },
+    select: { id: true, slug: true, displayName: true },
   });
   if (!master) notFound();
   return (
@@ -51,10 +51,16 @@ export default async function MasterPage({ params }: MasterPageProps) {
               Свободные даты и время отображаются при переходе к онлайн-записи.
             </p>
           </div>
-          <ButtonLink className="mt-10" href={`/booking?master=${master.slug}`}>
-            Записаться к мастеру
-          </ButtonLink>
         </div>
+      </Container>
+      <Container className="pb-20 sm:pb-28">
+        <section className="border-t border-line pt-12">
+          <p className="text-[11px] font-medium uppercase tracking-[0.32em] text-muted">
+            Запись к мастеру
+          </p>
+          <h2 className="mt-4 font-serif text-5xl font-light">Расписание и свободное время</h2>
+          <BookingForm fixedMaster={master} />
+        </section>
       </Container>
     </main>
   );

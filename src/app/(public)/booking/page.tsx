@@ -1,12 +1,17 @@
 import type { Metadata } from "next";
+import { BookingForm } from "@/components/booking/booking-form";
 import { PageHero } from "@/components/page-hero";
-import { Card } from "@/components/ui/card";
 import { Container } from "@/components/ui/container";
 
 export const metadata: Metadata = { title: "Заявка на запись" };
-const steps = ["Услуга", "Мастер", "Дата", "Время", "Контакты"];
+const steps = ["Услуга", "Дата", "Время", "Мастер", "Контакты"];
 
-export default function BookingPage() {
+export default async function BookingPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ service?: string }>;
+}) {
+  const { service } = await searchParams;
   return (
     <main>
       <PageHero
@@ -23,13 +28,7 @@ export default function BookingPage() {
             </li>
           ))}
         </ol>
-        <Card className="mt-8 text-center">
-          <h2 className="font-serif text-4xl font-light">Онлайн-заявка готовится к подключению</h2>
-          <p className="mx-auto mt-4 max-w-xl text-foreground/75">
-            На следующих этапах здесь появятся услуги, мастера и свободные интервалы с шагом 15
-            минут. Выбранное время будет зарезервировано сразу после отправки заявки.
-          </p>
-        </Card>
+        <BookingForm initialServiceId={service} />
       </Container>
     </main>
   );
