@@ -18,6 +18,7 @@ import { updateSettings } from "@/lib/admin/settings";
 import { createException, removeException } from "@/lib/admin/schedule";
 import { updateStaff } from "@/lib/admin/staff";
 import { requireRole } from "@/lib/auth/permissions";
+import { cancelBooking, confirmBooking, rescheduleBooking } from "@/lib/booking/admin";
 
 async function actor() {
   const session = await requireRole(Role.ADMIN);
@@ -151,5 +152,46 @@ export async function removeExceptionAction(formData: FormData) {
     () => removeException(admin, String(formData.get("id"))),
     `/admin/schedule?date=${encodeURIComponent(String(formData.get("date") || ""))}`,
     "Изменение графика удалено",
+  );
+}
+
+export async function confirmBookingAction(formData: FormData) {
+  const admin = await actor();
+  await complete(
+    () => confirmBooking(admin, String(formData.get("id"))),
+    "/admin/bookings?status=PENDING",
+    "Заявка подтверждена",
+  );
+}
+
+export async function cancelBookingAction(formData: FormData) {
+  const admin = await actor();
+  const status = String(formData.get("returnStatus") || "PENDING");
+  const requestedPath = String(formData.get("returnPath") || "");
+  const returnPath = requestedPath.startsWith("/admin/appointments?")
+    ? requestedPath
+    : `/admin/bookings?status=${encodeURIComponent(status)}`;
+  await complete(
+    () =>
+      cancelBooking(admin, String(formData.get("id")), {
+        reason: formData.get("reason"),
+      }),
+    returnPath,
+    "Запись отменена",
+  );
+}
+
+export async function rescheduleBookingAction(formData: FormData) {
+  const admin = await actor();
+  const id = String(formData.get("id"));
+  await complete(
+    () =>
+      rescheduleBooking(admin, id, {
+        staffId: formData.get("staffId"),
+        date: formData.get("date"),
+        time: formData.get("time"),
+      }),
+    `/admin/appointments/${encodeURIComponent(id)}/reschedule`,
+    "Запись перенесена",
   );
 }

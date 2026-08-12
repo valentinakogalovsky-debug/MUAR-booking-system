@@ -7,6 +7,9 @@ import { Container } from "@/components/ui/container";
 
 const links = [
   ["Обзор", "/admin"],
+  ["Заявки", "/admin/bookings"],
+  ["Расписание", "/admin/appointments"],
+  ["Клиенты", "/admin/clients"],
   ["Услуги", "/admin/catalog"],
   ["Мастера", "/admin/staff"],
   ["Графики", "/admin/schedule"],

@@ -20,6 +20,11 @@ export class BookingError extends Error {
   }
 }
 
+type BookingCreationContext = {
+  actor: { userId: string; organizationId: string };
+  source: "ADMIN";
+};
+
 function isDatabaseConflict(error: unknown) {
   const pending: unknown[] = [error];
   const visited = new Set<unknown>();
@@ -87,7 +92,11 @@ function publicBooking(booking: PublicBookingRecord) {
   };
 }
 
-export async function createBookingRequest(input: unknown, rawIdempotencyKey: string | null) {
+export async function createBookingRequest(
+  input: unknown,
+  rawIdempotencyKey: string | null,
+  context?: BookingCreationContext,
+) {
   const parsed = bookingRequestSchema.safeParse(input);
   const parsedKey = idempotencyKeySchema.safeParse(rawIdempotencyKey);
   if (!parsed.success || !parsedKey.success) {
@@ -106,13 +115,14 @@ export async function createBookingRequest(input: unknown, rawIdempotencyKey: st
         await tx.idempotencyKey.create({
           data: {
             key,
+            userId: context?.actor.userId,
             requestHash,
             expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000),
           },
         });
 
         const organization = await tx.organization.findUnique({
-          where: { slug: "muare" },
+          where: context ? { id: context.actor.organizationId } : { slug: "muare" },
           select: { id: true, timezone: true, settings: true },
         });
         if (!organization?.settings) {
@@ -207,8 +217,9 @@ export async function createBookingRequest(input: unknown, rawIdempotencyKey: st
             startAt: value.startAt,
             endAt,
             occupiedUntil,
-            status: "PENDING",
-            source: "CUSTOMER",
+            createdById: context?.actor.userId,
+            status: context ? "CONFIRMED" : "PENDING",
+            source: context?.source ?? "CUSTOMER",
             totalPriceMinor: service.priceMinor,
             currency: service.currency,
             services: {
@@ -226,14 +237,19 @@ export async function createBookingRequest(input: unknown, rawIdempotencyKey: st
         await tx.bookingHistory.create({
           data: {
             bookingId: created.id,
-            action: "REQUESTED",
-            newData: { status: "PENDING", source: "CUSTOMER" },
+            changedById: context?.actor.userId,
+            action: context ? "CREATED" : "REQUESTED",
+            newData: {
+              status: context ? "CONFIRMED" : "PENDING",
+              source: context?.source ?? "CUSTOMER",
+            },
           },
         });
         await tx.auditLog.create({
           data: {
             organizationId: organization.id,
-            action: "BOOKING_REQUESTED",
+            userId: context?.actor.userId,
+            action: context ? "BOOKING_CREATED" : "BOOKING_REQUESTED",
             entityType: "BOOKING",
             entityId: created.id,
             metadata: { staffId: staff.id, serviceId: service.id, startAt: value.startAt },

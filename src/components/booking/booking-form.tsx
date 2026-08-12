@@ -79,9 +79,11 @@ function monthCells(month: string) {
 }
 
 export function BookingForm({
+  adminMode = false,
   fixedMaster,
   initialServiceId,
 }: {
+  adminMode?: boolean;
   fixedMaster?: Master;
   initialServiceId?: string;
 }) {
@@ -261,7 +263,7 @@ export function BookingForm({
     setSubmitting(true);
     setError("");
     try {
-      const response = await fetch("/api/booking-requests", {
+      const response = await fetch(adminMode ? "/api/admin/bookings" : "/api/booking-requests", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -296,12 +298,16 @@ export function BookingForm({
       <div aria-live="polite">
         <Card className="mt-8 text-center">
           <p className="text-xs font-medium uppercase tracking-[0.2em] text-accent">
-            Заявка отправлена
+            {adminMode ? "Запись создана" : "Заявка отправлена"}
           </p>
-          <h2 className="mt-4 font-serif text-4xl font-light sm:text-5xl">Время зарезервировано</h2>
+          <h2 className="mt-4 font-serif text-4xl font-light sm:text-5xl">
+            {adminMode ? "Клиент записан" : "Время зарезервировано"}
+          </h2>
           <p className="mx-auto mt-5 max-w-2xl leading-7 text-foreground/75">
-            Мастер {success.staff.displayName}, {formatStudioSlot(success.startAt)}. Администратор
-            позвонит вам, чтобы уточнить детали записи.
+            Мастер {success.staff.displayName}, {formatStudioSlot(success.startAt)}.
+            {adminMode
+              ? " Запись сразу подтверждена."
+              : " Администратор позвонит вам, чтобы уточнить детали записи."}
           </p>
           <p className="mt-4 text-sm text-muted">Номер заявки: {success.id}</p>
         </Card>
@@ -508,8 +514,9 @@ export function BookingForm({
               />
             </div>
             <p className="mt-5 text-sm leading-6 text-muted">
-              После отправки время будет зарезервировано. Администратор позвонит для уточнения
-              деталей.
+              {adminMode
+                ? "После отправки запись сразу получит статус «Подтверждена»."
+                : "После отправки время будет зарезервировано. Администратор позвонит для уточнения деталей."}
             </p>
             <Button className="mt-6 w-full sm:w-auto" disabled={submitting} type="submit">
               {submitting ? "Отправляем…" : "Отправить заявку"}

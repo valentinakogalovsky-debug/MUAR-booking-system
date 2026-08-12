@@ -3,6 +3,9 @@ import { Container } from "@/components/ui/container";
 
 export default async function AdminPage() {
   const sections = [
+    ["Заявки", "Новые заявки, подтверждение и отмена после звонка", "/admin/bookings"],
+    ["Расписание", "Записи всех мастеров на день или неделю", "/admin/appointments"],
+    ["Клиенты", "Контакты клиентов и история их записей", "/admin/clients"],
     ["Услуги и дополнения", "Редактирование каталога, цен и длительности", "/admin/catalog"],
     ["Мастера", "Пять профилей и доступность услуг", "/admin/staff"],
     ["Графики", "Смены, отпуска, больничные и блокировки", "/admin/schedule"],

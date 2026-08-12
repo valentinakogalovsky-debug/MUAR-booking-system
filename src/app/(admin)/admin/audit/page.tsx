@@ -19,6 +19,12 @@ const actionNames: Record<string, string> = {
   SETTINGS_UPDATED: "Изменены настройки записи",
   SCHEDULE_EXCEPTION_CREATED: "Добавлено изменение графика",
   SCHEDULE_EXCEPTION_DELETED: "Удалено изменение графика",
+  BOOKING_CONFIRMED: "Заявка подтверждена",
+  BOOKING_CREATED: "Запись создана вручную",
+  BOOKING_RESCHEDULED: "Запись перенесена",
+  BOOKING_CANCELLED: "Запись отменена",
+  BOOKING_COMPLETED: "Запись выполнена",
+  BOOKING_NO_SHOW: "Отмечена неявка",
 };
 
 export default async function AuditPage() {
