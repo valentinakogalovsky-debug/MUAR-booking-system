@@ -15,7 +15,10 @@ export function getDb(): PrismaClient {
   }
 
   prisma = new PrismaClient({
-    adapter: new PrismaPg({ connectionString }),
+    adapter: new PrismaPg({
+      connectionString,
+      options: "-c timezone=UTC",
+    }),
   });
 
   return prisma;

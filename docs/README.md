@@ -15,6 +15,9 @@
 8. [Architecture](./ARCHITECTURE.md) — модули, зависимости и безопасность.
 9. [Content Specification](./source/muare-content-spec.html) — контент сайта.
 10. [Brand & Design Guide](./source/muare-brand-guide.html) — визуальная система.
+11. [Test Plan](./TEST_PLAN.md) — обязательные P0/P1 проверки MVP.
+12. [Release Runbook](./RELEASE_RUNBOOK.md) — staging, backup, миграции и rollback.
+13. [Release Notes](./RELEASE_NOTES.md) — состав и результат проверки release candidate.
 
 `spec.md` определяет продукт, а `PLAN.md` — порядок реализации. При конфликте
 между ними работа останавливается: ИИ сообщает о противоречии и не выбирает вариант

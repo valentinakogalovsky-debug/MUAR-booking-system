@@ -80,8 +80,8 @@ export default function HomePage() {
                 alt="Зона ресепшен студии MUARÉ"
                 className="object-cover"
                 fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 55vw"
+                preload
+                sizes="(max-width: 1024px) calc(100vw - 40px), 55vw"
                 src="/images/studio/reception-home.jpeg"
               />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-foreground/55 to-transparent p-6 pt-24 text-xs uppercase tracking-[0.18em] text-white">
@@ -111,7 +111,7 @@ export default function HomePage() {
                     alt={direction.imageAlt}
                     className="object-cover"
                     fill
-                    sizes="(max-width: 1024px) 100vw, 34vw"
+                    sizes="(max-width: 1024px) calc(100vw - 88px), 34vw"
                     src={direction.image}
                     style={{ objectPosition: direction.imagePosition }}
                   />

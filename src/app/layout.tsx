@@ -19,11 +19,16 @@ const jost = Jost({
 export const metadata: Metadata = {
   title: { default: "MUARÉ — студия ногтевого сервиса", template: "%s — MUARÉ" },
   description: "Сайт студии ногтевого сервиса MUARÉ со встроенной системой онлайн-записи.",
+  icons: { icon: "/favicon.svg" },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="ru" className={`${cormorant.variable} ${jost.variable} h-full`}>
+    <html
+      lang="ru"
+      className={`${cormorant.variable} ${jost.variable} h-full`}
+      data-scroll-behavior="smooth"
+    >
       <body className="flex min-h-full flex-col antialiased">{children}</body>
     </html>
   );

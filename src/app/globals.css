@@ -4,8 +4,8 @@
   --background: #f7f1ec;
   --foreground: #3a343c;
   --surface: #fbf7f2;
-  --muted: #756c7c;
-  --accent: #8e7cb0;
+  --muted: #675e6e;
+  --accent: #6d5c8c;
   --sand: #e7d3ca;
   --pistachio: #b4c49c;
   --lavender: #c1b4d8;
@@ -57,4 +57,19 @@ input {
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }

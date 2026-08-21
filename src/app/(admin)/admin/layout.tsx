@@ -28,7 +28,11 @@ export default async function AdminLayout({ children }: { children: React.ReactN
           </Link>
           <nav aria-label="Административная навигация" className="flex flex-wrap gap-4 text-sm">
             {links.map(([label, href]) => (
-              <Link className="hover:text-accent focus-visible:outline-2" href={href} key={href}>
+              <Link
+                className="inline-flex min-h-11 items-center hover:text-accent focus-visible:outline-2"
+                href={href}
+                key={href}
+              >
                 {label}
               </Link>
             ))}

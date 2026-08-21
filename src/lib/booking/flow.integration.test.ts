@@ -17,8 +17,25 @@ describe.skipIf(!baseUrl)("transactional booking API", () => {
     expect(service).toBeDefined();
     expect(master).toBeDefined();
 
+    const now = new Date();
+    const months = [0, 1].map((offset) =>
+      new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + offset, 1))
+        .toISOString()
+        .slice(0, 7),
+    );
+    let availableDate: string | undefined;
+    for (const month of months) {
+      const calendarResponse = await fetch(
+        `${baseUrl}/api/availability/calendar?serviceId=${service!.id}&staffId=${master!.id}&month=${month}`,
+      );
+      const calendar = (await calendarResponse.json()) as { dates: Array<{ date: string }> };
+      availableDate = calendar.dates[0]?.date;
+      if (availableDate) break;
+    }
+    expect(availableDate).toBeDefined();
+
     const availabilityResponse = await fetch(
-      `${baseUrl}/api/availability?serviceId=${service!.id}&staffId=${master!.id}&date=2026-08-12`,
+      `${baseUrl}/api/availability?serviceId=${service!.id}&staffId=${master!.id}&date=${availableDate}`,
     );
     const availability = (await availabilityResponse.json()) as {
       masters: Array<{ starts: string[] }>;
@@ -27,12 +44,13 @@ describe.skipIf(!baseUrl)("transactional booking API", () => {
     const startAt = availability.masters[0]?.starts[0];
     expect(startAt).toBeDefined();
 
+    const runId = Date.now().toString(36);
     const request = (suffix: string) =>
       fetch(`${baseUrl}/api/booking-requests`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Idempotency-Key": `stage9-vitest-${suffix}`,
+          "Idempotency-Key": `stage12-vitest-${runId}-${suffix}`,
         },
         body: JSON.stringify({
           serviceIds: [service!.id],

@@ -23,7 +23,7 @@
     "@prisma/client": "^7.9.0",
     "bcryptjs": "^3.0.3",
     "dotenv": "^17.4.2",
-    "next": "16.2.11",
+    "next": "16.3.0",
     "next-auth": "^5.0.0-beta.32",
     "pg": "^8.22.0",
     "react": "19.2.4",
@@ -50,5 +50,8 @@
     "sharp@0.34.5": true,
     "@prisma/engines@7.9.1": true,
     "prisma@7.9.1": true
+  },
+  "overrides": {
+    "deepmerge-ts": "8.0.2"
   }
 }

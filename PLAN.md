@@ -185,12 +185,16 @@ Commit: `feat: add staff and admin workspaces`
 
 ## 14. Этап 12 — тестирование и запуск
 
-- [ ] Выполнить Test Plan и все P0/P1 Test Cases.
-- [ ] Security review: IDOR, CSRF, rate limiting, tenant boundaries и secrets.
-- [ ] Accessibility review и keyboard-only сценарии.
-- [ ] Lighthouse и оптимизация изображений.
+- [x] Выполнить локальный Test Plan и автоматизированные P0/P1 Test Cases.
+- [x] Security review: IDOR, CSRF, rate limiting, tenant boundaries и secrets.
+- [x] Accessibility review и keyboard-only сценарии.
+- [x] Lighthouse и оптимизация изображений.
 - [ ] Production PostgreSQL, backup, migrations и rollback.
-- [ ] Staging smoke, production release и фактические Release Notes.
+- [ ] Staging smoke и production release (требуются выбранный хостинг и production PostgreSQL).
+- [x] Подготовить Release Notes и runbook выпуска.
+
+Локальный release candidate проверен 12.08.2026. Production-пункты нельзя закрыть без
+отдельных staging/production окружений, резервной копии и подтверждённого deployment.
 
 Commit: `chore: release muare booking MVP`
 
